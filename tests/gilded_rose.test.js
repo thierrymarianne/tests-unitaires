@@ -1,4 +1,4 @@
-const { Shop, Item } = require("../src/gilded_rose");
+const { Item, Shop } = require("../src/Shop");
 
 describe("Gilded Rose", function () {
   it("should foo", function () {
