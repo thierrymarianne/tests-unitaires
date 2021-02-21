@@ -46,11 +46,3 @@ Vous pouvez faire les changements que vous voulez à la méthode updateQuality e
 
 Juste une précision, un produit ne peut jamais voir sa qualité augmenter au-dessus de 50, cependant "Sulfuras" est un objet légendaire et comme tel sa qualité est de 80 et il ne change jamais.  
 
-## Liste d'actions à mener
-
- - [x] Extraire la classe `Item` 
- - [x] Extraire la classe `Shop` 
- - [x] Introduire un module `GildedRose` 
- - [x] Ajout d'une méthode `updateQuality` à la classe `Item`
- - [x] Mettre en évidence qu'il s'agit bien d'un test s'assurant  
-   d'une bonne interaction entre les classes `Item` et `Shop`
