@@ -7,10 +7,10 @@ const sulfurasHandOfRagnaros = 'Sulfuras, Hand of Ragnaros';
 const backstagePasses = 'Backstage passes to a TAFKAL80ETC concert';
 const conjuredManaCake = 'Conjured Mana Cake';
 
-describe('Gilded Rose', function () {
+describe('Gilded Rose', () => {
     it(
         'preserves the names of items in a shop when assessing their quality.',
-        function () {
+        () => {
             const items = [
                 new Item(dexterityVest, 10, 20),
                 new Item(agedBrie, 2, 0),
@@ -41,7 +41,7 @@ describe('Gilded Rose', function () {
 
     it(
         'decreases the sellIns of items in a shop except for sulfuras when assessing their quality.',
-        function () {
+        () => {
             const sellIns = [
                 10,
                 2,
@@ -77,7 +77,7 @@ describe('Gilded Rose', function () {
 
     it(
         'decreases the sellIns of items in a shop except for sulfuras when assessing their quality.',
-        function () {
+        () => {
             const sellIns = [
                 10,
                 2,
