@@ -2,7 +2,8 @@ const {Shop} = require('../../src/GildedRose/Shop');
 const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {QualityAssurance} = require('../../src/GildedRose');
 
-describe('how a shop assesses the quality of its items',
+describe(
+    'GildRose',
     () => {
         it(
             'preserves the names of items in a shop.',
