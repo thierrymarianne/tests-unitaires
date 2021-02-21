@@ -76,18 +76,25 @@ describe('Gilded Rose', () => {
     );
 
     it(
-        'decreases the sellIns of items in a shop except for sulfuras when assessing their quality.',
+        'does not decrease the sellIns of sulfuras items when assessing their quality.',
         () => {
             const sellIns = [
-                10,
-                2,
-                5,
-                15,
-                10,
-                5,
-                3
+                0,
+                -1,
             ];
 
+            const items = [
+                new Item(sulfurasHandOfRagnaros, 0, 80),
+                new Item(sulfurasHandOfRagnaros, -1, 80),
+            ];
+
+            const gildedRose = new Shop(items);
+            const updatedItems = gildedRose.updateQuality();
+
+            expect(updatedItems[0].sellIn).toBe(sellIns[0]);
+            expect(updatedItems[1].sellIn).toBe(sellIns[1]);
+        }
+    );
             const items = [
                 new Item(dexterityVest, 10, 20),
                 new Item(agedBrie, 2, 0),
