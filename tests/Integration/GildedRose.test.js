@@ -1,5 +1,6 @@
 const {Shop} = require('../../src/GildedRose/Shop');
 const {Item, ItemType} = require('../../src/GildedRose/Item');
+const {QualityAssurance} = require('../../src/GildedRose');
 
 describe('how a shop assesses the quality of its items',
     () => {
@@ -165,32 +166,62 @@ describe('how a shop assesses the quality of its items',
         );
 
         it(
-            'increases the quality of aged brie or backstage passes.',
+            'increases the quality of aged brie over time.',
+            () => {
+                const qualities = [
+                    {startsAt: 0, eventuallyAssessedAt: 1},
+                    {startsAt: 30, eventuallyAssessedAt: 31},
+                    {startsAt: QualityAssurance.MAX_QUALITY, eventuallyAssessedAt: QualityAssurance.MAX_QUALITY},
+                ];
+
+                qualities.forEach((q) => {
+                    const items = [
+                        new Item(ItemType.agedBrie, 2, q.startsAt),
+                    ];
+
+                    const gildedRose = new Shop(items);
+                    const updatedItems = gildedRose.updateQuality();
+
+                    expect(updatedItems[0].quality).toBe(q.eventuallyAssessedAt);
+                });
+            }
+        );
+
+        it(
+            'increases the quality of backstage passes over time.',
             () => {
                 const quality = [
-                    0,
-                    20,
-                    49,
-                    49,
+                    [
+                        {startsAt: 20, eventuallyAssessedAt: 21},
+                        {startsAt: 49, eventuallyAssessedAt: 50},
+                        {startsAt: 49, eventuallyAssessedAt: 50},
+                    ],
+                    [
+                        {startsAt: 0, eventuallyAssessedAt: 1},
+                        {startsAt: 49, eventuallyAssessedAt: 50},
+                        {startsAt: QualityAssurance.MAX_QUALITY, eventuallyAssessedAt: QualityAssurance.MAX_QUALITY}
+                    ]
                 ];
 
-                const items = [
-                    new Item(ItemType.agedBrie, 2, 0),
-                    new Item(ItemType.backstagePasses, 15, 20),
-                    new Item(ItemType.backstagePasses, 10, 49),
-                    new Item(ItemType.backstagePasses, 5, 49),
-                ];
+                quality.forEach((q) => {
+                    const items = [
+                        new Item(ItemType.backstagePasses, 15, q[0].startsAt),
+                        new Item(ItemType.backstagePasses, 10, q[1].startsAt),
+                        new Item(ItemType.backstagePasses, 5, q[2].startsAt),
+                    ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                    const gildedRose = new Shop(items);
+                    const updatedItems = gildedRose.updateQuality();
 
-                // Aged brie quality increases overtime
-                expect(updatedItems[0].quality).toBe(quality[0] + 1);
+                    expect(updatedItems[0].quality)
+                    .toBe(q[0].eventuallyAssessedAt);
 
-                // Backstage passes quality increases overtime
-                expect(updatedItems[1].quality).toBe(quality[1] + 1);
-                expect(updatedItems[2].quality).toBe(quality[2] + 1);
-                expect(updatedItems[3].quality).toBe(quality[3] + 1);
+                    expect(updatedItems[1].quality)
+                    .toBe(q[1].eventuallyAssessedAt);
+
+                    expect(updatedItems[2].quality)
+                    .toBe(q[2].eventuallyAssessedAt);
+                })
             }
         );
 
