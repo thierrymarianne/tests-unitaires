@@ -149,5 +149,35 @@ describe('Gilded Rose', () => {
             expect(updatedItems[3].quality).toBe(quality[3] + 1);
         }
     );
+
+    it(
+        'does not increase the quality of aged brie or backstage as soon as the quality has reached its maximum.',
+        () => {
+            const quality = [
+                50,
+                50,
+                50,
+                50,
+            ];
+
+            const items = [
+                new Item(agedBrie, 2, quality[0]),
+                new Item(backstagePasses, 15, quality[1]),
+                new Item(backstagePasses, 10, quality[2]),
+                new Item(backstagePasses, 5, quality[3]),
+            ];
+
+            const gildedRose = new Shop(items);
+            const updatedItems = gildedRose.updateQuality();
+
+            // Aged brie quality increases overtime
+            expect(updatedItems[0].quality).toBe(quality[0]);
+
+            // Backstage passes quality increases overtime
+            expect(updatedItems[1].quality).toBe(quality[1]);
+            expect(updatedItems[2].quality).toBe(quality[2]);
+            expect(updatedItems[3].quality).toBe(quality[3]);
+        }
+    );
 });
 
