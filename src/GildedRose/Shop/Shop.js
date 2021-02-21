@@ -1,5 +1,6 @@
 
 const {ItemType} = require('../Item');
+const {QualityAssurance} = require('../../GildedRose');
 
 class Shop {
     constructor(items = []) {
@@ -18,18 +19,18 @@ class Shop {
                     }
                 }
             } else {
-                if (this.items[i].quality < 50) {
+                if (this.items[i].quality < QualityAssurance.MAX_QUALITY) {
                     this.items[i].quality = this.items[i].quality + 1;
                     if (
                         this.items[i].name === ItemType.backstagePasses
                     ) {
                         if (this.items[i].sellIn < 11) {
-                            if (this.items[i].quality < 50) {
+                            if (this.items[i].quality < QualityAssurance.MAX_QUALITY) {
                                 this.items[i].quality = this.items[i].quality + 1;
                             }
                         }
                         if (this.items[i].sellIn < 6) {
-                            if (this.items[i].quality < 50) {
+                            if (this.items[i].quality < QualityAssurance.MAX_QUALITY) {
                                 this.items[i].quality = this.items[i].quality + 1;
                             }
                         }
@@ -42,7 +43,7 @@ class Shop {
             }
 
             if (this.items[i].sellIn < 0) {
-                if (this.items[i].name !== ItemType.aged) {
+                if (this.items[i].name !== ItemType.agedBrie) {
                     if (
                         this.items[i].name !== ItemType.backstagePasses
                     ) {
@@ -55,7 +56,7 @@ class Shop {
                         this.items[i].quality = 0;
                     }
                 } else {
-                    if (this.items[i].quality < 50) {
+                    if (this.items[i].quality < QualityAssurance.MAX_QUALITY) {
                         this.items[i].quality = this.items[i].quality + 1;
                     }
                 }

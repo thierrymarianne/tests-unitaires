@@ -1,3 +1,4 @@
+
 const {Item} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
