@@ -95,26 +95,29 @@ describe('Gilded Rose', () => {
             expect(updatedItems[1].sellIn).toBe(sellIns[1]);
         }
     );
+
+    it(
+        'decreases the quality of items when assessing their quality.',
+        () => {
+            const quality = [
+                20,
+                7,
+                6
+            ];
+
             const items = [
                 new Item(dexterityVest, 10, 20),
-                new Item(agedBrie, 2, 0),
                 new Item(elixirOfTheMongose, 5, 7),
-                new Item(backstagePasses, 15, 20),
-                new Item(backstagePasses, 10, 49),
-                new Item(backstagePasses, 5, 49),
                 new Item(conjuredManaCake, 3, 6)
             ];
 
             const gildedRose = new Shop(items);
             const updatedItems = gildedRose.updateQuality();
 
-            expect(updatedItems[0].sellIn).toBe(sellIns[0] - 1);
-            expect(updatedItems[1].sellIn).toBe(sellIns[1] - 1);
-            expect(updatedItems[2].sellIn).toBe(sellIns[2] - 1);
-            expect(updatedItems[3].sellIn).toBe(sellIns[3] - 1);
-            expect(updatedItems[4].sellIn).toBe(sellIns[4] - 1);
-            expect(updatedItems[5].sellIn).toBe(sellIns[5] - 1);
-            expect(updatedItems[6].sellIn).toBe(sellIns[6] - 1);
+            expect(updatedItems[0].quality).toBe(quality[0] - 1);
+            expect(updatedItems[1].quality).toBe(quality[1] - 1);
+            expect(updatedItems[2].quality).toBe(quality[2] - 1);
         }
     );
 });
+
