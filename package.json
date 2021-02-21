@@ -1,0 +1,14 @@
+{
+  "name": "template-refactoring-test-gilded-rose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/gilded_rose.js",
+  "dependencies": {
+    "jest": "25.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.0",
+    "parcel-bundler": "^1.6.1"
+  },
+  "keywords": []
+}
