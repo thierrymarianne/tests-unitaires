@@ -121,6 +121,29 @@ describe('Gilded Rose', () => {
     );
 
     it(
+        'preserves the quality of sulfuras items over time at the same level.',
+        () => {
+            const sellIns = [
+                0,
+                -1,
+            ];
+
+            const sulfuraQuality = Item.sulfuraQuality();
+
+            const items = [
+                new Item(sulfurasHandOfRagnaros, sellIns[0], sulfuraQuality),
+                new Item(sulfurasHandOfRagnaros, sellIns[1], sulfuraQuality),
+            ];
+
+            const gildedRose = new Shop(items);
+            const updatedItems = gildedRose.updateQuality();
+
+            expect(updatedItems[0].quality).toBe(sulfuraQuality);
+            expect(updatedItems[1].quality).toBe(sulfuraQuality);
+        }
+    );
+
+    it(
         'increases the quality of aged brie or backstage passes when assessing their quality.',
         () => {
             const quality = [

@@ -8,6 +8,9 @@ class Item {
     updateQuality() {
         // TODO
     }
+    static sulfuraQuality() {
+      return 80;
+    }
 }
 
 module.exports = Item;
