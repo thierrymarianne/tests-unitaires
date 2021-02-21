@@ -128,7 +128,7 @@ describe('Gilded Rose', () => {
                 -1,
             ];
 
-            const sulfuraQuality = Item.sulfuraQuality();
+            const sulfuraQuality = Item.SULFURA_QUALITY;
 
             const items = [
                 new Item(sulfurasHandOfRagnaros, sellIns[0], sulfuraQuality),
