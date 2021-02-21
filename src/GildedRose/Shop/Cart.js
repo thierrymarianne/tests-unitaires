@@ -3,15 +3,17 @@ const ShoppingArticle = require('./ShoppingArticle');
 
 class Cart {
     constructor(shoppingArticles = []) {
-        this.articles = shoppingArticles.map((a, index) => {
+        this.shoppingArticles = shoppingArticles.map((a, index) => {
             if (!(a instanceof ShoppingArticle)) {
                 throw `Invalid shopping article at index #${index}`
             }
+
+            return a;
         })
     }
 
     articles() {
-        return this.articles;
+        return this.shoppingArticles;
     }
 }
 
