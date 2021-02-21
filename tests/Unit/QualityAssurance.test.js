@@ -3,7 +3,7 @@ const {QualityAssurance} = require('../../src/GildedRose');
 
 describe('Quality assurance', () => {
     it(
-        'warrants the acceptable quality of items.',
+        'warrants the quality of items.',
         () => {
             expect(QualityAssurance.isOfAcceptableQuality(
                 new Item(ItemName.agedBrie)
