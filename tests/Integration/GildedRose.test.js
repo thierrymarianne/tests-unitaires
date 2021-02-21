@@ -24,6 +24,15 @@ describe("Gilded Rose", function () {
 
     const gildedRose = new Shop(items);
     const updatedItems = gildedRose.updateQuality();
+
     expect(updatedItems[0].name).toBe(dexterityVest);
+    expect(updatedItems[1].name).toBe(agedBrie);
+    expect(updatedItems[2].name).toBe(elixirOfTheMongose);
+    expect(updatedItems[3].name).toBe(sulfurasHandOfRagnaros);
+    expect(updatedItems[4].name).toBe(sulfurasHandOfRagnaros);
+    expect(updatedItems[5].name).toBe(backstagePasses);
+    expect(updatedItems[6].name).toBe(backstagePasses);
+    expect(updatedItems[7].name).toBe(backstagePasses);
+    expect(updatedItems[8].name).toBe(conjuredManaCake);
   });
 });
