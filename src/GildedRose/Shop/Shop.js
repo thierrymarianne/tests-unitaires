@@ -1,13 +1,20 @@
 
+const Cart = require('./Cart');
+const ShoppingArticle = require('./ShoppingArticle');
+
 const {ItemName} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
 class Shop {
     constructor(items = []) {
+        this.cart = new Cart(items.map(i => ShoppingArticle.from(i)));
         this.items = items;
     }
 
-    updateQuality() {
+    assessQualityOfShoppingArticlesInCart() {
+    }
+
+    assessQualityOfItems() {
         for (let i = 0; i < this.items.length; i++) {
             if (
                 this.items[i].name !== ItemName.agedBrie &&
@@ -64,6 +71,12 @@ class Shop {
         }
 
         return this.items;
+    }
+
+    updateQuality() {
+        this.assessQualityOfShoppingArticlesInCart();
+
+        return this.assessQualityOfItems()
     }
 }
 
