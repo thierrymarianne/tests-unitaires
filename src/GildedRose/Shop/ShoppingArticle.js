@@ -42,12 +42,11 @@ class ShoppingArticle {
             return shoppingArticle;
         }
 
-        if (QualityAssurance.getStableQuality(shoppingArticle) !== shoppingArticle.quality()) {
-            throw [
-                `"${ItemName.sulfurasHandOfRagnaros}" items are legendary, `,
-                'hence their quality have to be compliant with a standard of ',
-                `${QualityAssurance.getStableQuality(shoppingArticle)}.`
-            ].join('')
+        if (
+            shoppingArticle.name() === ItemName.sulfurasHandOfRagnaros &&
+            QualityAssurance.getStableQuality(shoppingArticle) !== shoppingArticle.quality()
+        ) {
+            QualityAssurance.throwNonCompliantQualityError(shoppingArticle);
         }
 
         return shoppingArticle;

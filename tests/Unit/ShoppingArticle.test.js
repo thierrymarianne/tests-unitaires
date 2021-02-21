@@ -67,7 +67,7 @@ describe('Shopping article', () => {
                 ShoppingArticle.from(
                     new Item(name, sellIn, invalidQuality)
                 );
-            }).toThrow('"Sulfuras, Hand of Ragnaros" items are legendary, hence their quality have to be compliant with a standard of 80.');
+            }).toThrow('Quality of "Sulfuras, Hand of Ragnaros" items has to be compliant with a standard of 80.');
         }
     );
 });

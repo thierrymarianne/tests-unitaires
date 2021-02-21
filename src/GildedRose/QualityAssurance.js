@@ -1,5 +1,4 @@
-
-const {Item, ItemName} = require('./Item');
+const {ItemName} = require('./Item');
 
 class QualityAssurance {
     static isOfAcceptableQuality(item) {
@@ -24,6 +23,13 @@ class QualityAssurance {
         return QualityAssurance.STABLE_QUALITY_OVER_TIME[shoppingArticle.name()];
     }
 
+    static throwNonCompliantQualityError(shoppingArticle) {
+        throw [
+            `Quality of "${shoppingArticle.name()}" items `,
+            `has to be compliant with a standard of `,
+            `${QualityAssurance.getStableQuality(shoppingArticle)}.`
+        ].join('')
+    }
 }
 
 QualityAssurance.MAX_QUALITY = 50;
