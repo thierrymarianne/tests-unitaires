@@ -2,7 +2,7 @@
   "name": "template-refactoring-test-gilded-rose",
   "version": "1.0.0",
   "description": "",
-  "main": "src/Shop/index.js",
+  "main": "src/GildedRose/index.js",
   "dependencies": {
     "jest": "25.1.0"
   },
