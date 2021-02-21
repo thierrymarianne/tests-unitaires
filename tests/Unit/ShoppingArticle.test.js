@@ -35,9 +35,9 @@ describe('Shopping article', () => {
                 new Item(name, sellIn, quality)
             );
 
-            expect(article.sellIn()).toBe(sellIn);
-            expect(article.quality()).toBe(quality);
             expect(article.name()).toBe(name);
+            expect(article.quality()).toBe(quality);
+            expect(article.sellIn()).toBe(sellIn);
         }
     );
 });
