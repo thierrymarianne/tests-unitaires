@@ -27,24 +27,6 @@ class ShoppingArticle {
         return this.item.quality;
     }
 
-    isNotOfStableQuality() {
-        const isOfStableQuality = typeof QualityAssurance.STABLE_QUALITY_OVER_TIME[this.name()] !== 'undefined';
-
-        if (isOfStableQuality) {
-            return false
-        }
-
-        return true;
-    }
-
-    getStableQuality() {
-        if (this.isNotOfStableQuality()) {
-            throw 'This item is not of stable quality';
-        }
-
-        return QualityAssurance.STABLE_QUALITY_OVER_TIME[this.name()];
-    }
-
     isNotInShopCatalogue() {
         return ! Object.values(ItemName).includes(this.name());
     }
@@ -56,15 +38,15 @@ class ShoppingArticle {
             throw `Can not find item in shop by name: "${shoppingArticle.name()}"`
         }
 
-        if (shoppingArticle.isNotOfStableQuality()) {
+        if (QualityAssurance.isNotOfStableQuality(shoppingArticle)) {
             return shoppingArticle;
         }
 
-        if (shoppingArticle.getStableQuality() !== shoppingArticle.quality()) {
+        if (QualityAssurance.getStableQuality(shoppingArticle) !== shoppingArticle.quality()) {
             throw [
                 `"${ItemName.sulfurasHandOfRagnaros}" items are legendary, `,
                 'hence their quality have to be compliant with a standard of ',
-                `${shoppingArticle.getStableQuality()}.`
+                `${QualityAssurance.getStableQuality(shoppingArticle)}.`
             ].join('')
         }
 
