@@ -5,7 +5,7 @@ describe(
     'Cart',
     () => {
         it(
-            'contains only shopping articles.',
+            'can not contain something different from shopping articles.',
             () => {
                 expect(() => {
                     new Cart([
