@@ -1,15 +1,15 @@
-const {Item, Shop} = require("../../src/GildedRose");
+const {Item, Shop} = require('../../src/GildedRose');
 
-const dexterityVest = "+5 Dexterity Vest";
-const agedBrie = "Aged Brie";
-const elixirOfTheMongose = "Elixir of the Mongoose";
-const sulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-const backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-const conjuredManaCake = "Conjured Mana Cake";
+const dexterityVest = '+5 Dexterity Vest';
+const agedBrie = 'Aged Brie';
+const elixirOfTheMongose = 'Elixir of the Mongoose';
+const sulfurasHandOfRagnaros = 'Sulfuras, Hand of Ragnaros';
+const backstagePasses = 'Backstage passes to a TAFKAL80ETC concert';
+const conjuredManaCake = 'Conjured Mana Cake';
 
-describe("Gilded Rose", function () {
+describe('Gilded Rose', function () {
     it(
-        "preserves the names of items in a shop when assessing their quality.",
+        'preserves the names of items in a shop when assessing their quality.',
         function () {
             const items = [
                 new Item(dexterityVest, 10, 20),
@@ -40,7 +40,7 @@ describe("Gilded Rose", function () {
     );
 
     it(
-        "decreases the sellIns of items in a shop except for sulfuras when assessing their quality.",
+        'decreases the sellIns of items in a shop except for sulfuras when assessing their quality.',
         function () {
             const sellIns = [
                 10,
@@ -76,7 +76,7 @@ describe("Gilded Rose", function () {
     );
 
     it(
-        "decreases the sellIns of items in a shop except for sulfuras when assessing their quality.",
+        'decreases the sellIns of items in a shop except for sulfuras when assessing their quality.',
         function () {
             const sellIns = [
                 10,
