@@ -1,5 +1,5 @@
 
-const ItemType = require('./ItemTypes');
+const {ItemType} = require('../Item');
 
 class Shop {
     constructor(items = []) {

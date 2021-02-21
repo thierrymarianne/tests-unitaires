@@ -1,4 +1,5 @@
-const {QualityAssurance, Item, ItemType} = require('../../src/GildedRose');
+const {Item, ItemType} = require('../../src/GildedRose/Item');
+const {QualityAssurance} = require('../../src/GildedRose');
 
 describe('Quality assurance', () => {
     it(
