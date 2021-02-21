@@ -56,7 +56,7 @@ describe('Shopping article', () => {
     );
 
     it(
-        'prevents the quality of "Sulfuras" items from being wrongfully labelled.',
+        'prevents the quality of "Sulfuras" items from being wrongfully declared.',
         () => {
 
             expect(() => {
