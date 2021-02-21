@@ -151,6 +151,28 @@ describe('Gilded Rose', () => {
     );
 
     it(
+        'voids the quality of backstage passes as soon as the concert is over.',
+        () => {
+            const quality = [
+                40,
+            ];
+
+            const sellIn = [
+                -1,
+            ];
+
+            const items = [
+                new Item(backstagePasses, sellIn[0], quality[0]),
+            ];
+
+            const gildedRose = new Shop(items);
+            const updatedItems = gildedRose.updateQuality();
+
+            expect(updatedItems[0].quality).toBe(0);
+        }
+    );
+
+    it(
         'does not increase the quality of aged brie or backstage as soon as the quality has reached its maximum.',
         () => {
             const quality = [
