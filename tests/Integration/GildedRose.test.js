@@ -173,6 +173,32 @@ describe('Gilded Rose', () => {
     );
 
     it(
+        'factors in the sellIn when increasing the quality of backstage passes when assessing their quality.',
+        () => {
+            const quality = [
+                10,
+                10
+            ];
+
+            const sellIn = [
+                10,
+                5,
+            ];
+
+            const items = [
+                new Item(backstagePasses, sellIn[0], quality[0]),
+                new Item(backstagePasses, sellIn[1], quality[1]),
+            ];
+
+            const gildedRose = new Shop(items);
+            const updatedItems = gildedRose.updateQuality();
+
+            expect(updatedItems[0].quality).toBe(quality[0] + 2);
+            expect(updatedItems[1].quality).toBe(quality[1] + 3);
+        }
+    );
+
+    it(
         'does not increase the quality of aged brie or backstage as soon as the quality has reached its maximum.',
         () => {
             const quality = [
