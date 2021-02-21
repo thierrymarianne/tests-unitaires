@@ -243,32 +243,44 @@ describe('how a shop assesses the quality of its items',
         );
 
         it(
-            'does not increase the quality of aged brie or backstage as soon as the quality has reached its maximum.',
+            'does not increase the quality of aged brie as soon as the quality has reached its maximum.',
             () => {
                 const quality = [
                     50,
+                ];
+
+                const items = [
+                    new Item(ItemType.agedBrie, 2, quality[0]),
+                ];
+
+                const gildedRose = new Shop(items);
+                const updatedItems = gildedRose.updateQuality();
+
+                expect(updatedItems[0].quality).toBe(quality[0]);
+            }
+        );
+
+        it(
+            'does not increase the quality of backstage passes as soon as the quality has reached its maximum.',
+            () => {
+                const quality = [
                     50,
                     50,
                     50,
                 ];
 
                 const items = [
-                    new Item(ItemType.agedBrie, 2, quality[0]),
-                    new Item(ItemType.backstagePasses, 15, quality[1]),
-                    new Item(ItemType.backstagePasses, 10, quality[2]),
-                    new Item(ItemType.backstagePasses, 5, quality[3]),
+                    new Item(ItemType.backstagePasses, 15, quality[0]),
+                    new Item(ItemType.backstagePasses, 10, quality[1]),
+                    new Item(ItemType.backstagePasses, 5, quality[2]),
                 ];
 
                 const gildedRose = new Shop(items);
                 const updatedItems = gildedRose.updateQuality();
 
-                // Aged brie quality increases overtime
                 expect(updatedItems[0].quality).toBe(quality[0]);
-
-                // Backstage passes quality increases overtime
                 expect(updatedItems[1].quality).toBe(quality[1]);
                 expect(updatedItems[2].quality).toBe(quality[2]);
-                expect(updatedItems[3].quality).toBe(quality[3]);
             }
         );
     }
