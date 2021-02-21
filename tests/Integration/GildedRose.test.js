@@ -1,5 +1,5 @@
 const {Shop} = require('../../src/GildedRose/Shop');
-const {Item, ItemType} = require('../../src/GildedRose/Item');
+const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {QualityAssurance} = require('../../src/GildedRose');
 
 describe('how a shop assesses the quality of its items',
@@ -8,30 +8,30 @@ describe('how a shop assesses the quality of its items',
             'preserves the names of items in a shop.',
             () => {
                 const items = [
-                    new Item(ItemType.dexterityVest, 10, 20),
-                    new Item(ItemType.agedBrie, 2, 0),
-                    new Item(ItemType.elixirOfTheMongose, 5, 7),
-                    new Item(ItemType.sulfurasHandOfRagnaros, 0, 80),
-                    new Item(ItemType.sulfurasHandOfRagnaros, -1, 80),
-                    new Item(ItemType.backstagePasses, 15, 20),
-                    new Item(ItemType.backstagePasses, 10, 49),
-                    new Item(ItemType.backstagePasses, 5, 49),
+                    new Item(ItemName.dexterityVest, 10, 20),
+                    new Item(ItemName.agedBrie, 2, 0),
+                    new Item(ItemName.elixirOfTheMongose, 5, 7),
+                    new Item(ItemName.sulfurasHandOfRagnaros, 0, 80),
+                    new Item(ItemName.sulfurasHandOfRagnaros, -1, 80),
+                    new Item(ItemName.backstagePasses, 15, 20),
+                    new Item(ItemName.backstagePasses, 10, 49),
+                    new Item(ItemName.backstagePasses, 5, 49),
                     // this conjured item does not work properly yet
-                    new Item(ItemType.conjuredManaCake, 3, 6)
+                    new Item(ItemName.conjuredManaCake, 3, 6)
                 ];
 
                 const gildedRose = new Shop(items);
                 const updatedItems = gildedRose.updateQuality();
 
-                expect(updatedItems[0].name).toBe(ItemType.dexterityVest);
-                expect(updatedItems[1].name).toBe(ItemType.agedBrie);
-                expect(updatedItems[2].name).toBe(ItemType.elixirOfTheMongose);
-                expect(updatedItems[3].name).toBe(ItemType.sulfurasHandOfRagnaros);
-                expect(updatedItems[4].name).toBe(ItemType.sulfurasHandOfRagnaros);
-                expect(updatedItems[5].name).toBe(ItemType.backstagePasses);
-                expect(updatedItems[6].name).toBe(ItemType.backstagePasses);
-                expect(updatedItems[7].name).toBe(ItemType.backstagePasses);
-                expect(updatedItems[8].name).toBe(ItemType.conjuredManaCake);
+                expect(updatedItems[0].name).toBe(ItemName.dexterityVest);
+                expect(updatedItems[1].name).toBe(ItemName.agedBrie);
+                expect(updatedItems[2].name).toBe(ItemName.elixirOfTheMongose);
+                expect(updatedItems[3].name).toBe(ItemName.sulfurasHandOfRagnaros);
+                expect(updatedItems[4].name).toBe(ItemName.sulfurasHandOfRagnaros);
+                expect(updatedItems[5].name).toBe(ItemName.backstagePasses);
+                expect(updatedItems[6].name).toBe(ItemName.backstagePasses);
+                expect(updatedItems[7].name).toBe(ItemName.backstagePasses);
+                expect(updatedItems[8].name).toBe(ItemName.conjuredManaCake);
             }
         );
 
@@ -49,13 +49,13 @@ describe('how a shop assesses the quality of its items',
                 ];
 
                 const items = [
-                    new Item(ItemType.dexterityVest, 10, 20),
-                    new Item(ItemType.agedBrie, 2, 0),
-                    new Item(ItemType.elixirOfTheMongose, 5, 7),
-                    new Item(ItemType.backstagePasses, 15, 20),
-                    new Item(ItemType.backstagePasses, 10, 49),
-                    new Item(ItemType.backstagePasses, 5, 49),
-                    new Item(ItemType.conjuredManaCake, 3, 6)
+                    new Item(ItemName.dexterityVest, 10, 20),
+                    new Item(ItemName.agedBrie, 2, 0),
+                    new Item(ItemName.elixirOfTheMongose, 5, 7),
+                    new Item(ItemName.backstagePasses, 15, 20),
+                    new Item(ItemName.backstagePasses, 10, 49),
+                    new Item(ItemName.backstagePasses, 5, 49),
+                    new Item(ItemName.conjuredManaCake, 3, 6)
                 ];
 
                 const gildedRose = new Shop(items);
@@ -80,8 +80,8 @@ describe('how a shop assesses the quality of its items',
                 ];
 
                 const items = [
-                    new Item(ItemType.sulfurasHandOfRagnaros, 0, 80),
-                    new Item(ItemType.sulfurasHandOfRagnaros, -1, 80),
+                    new Item(ItemName.sulfurasHandOfRagnaros, 0, 80),
+                    new Item(ItemName.sulfurasHandOfRagnaros, -1, 80),
                 ];
 
                 const gildedRose = new Shop(items);
@@ -102,9 +102,9 @@ describe('how a shop assesses the quality of its items',
                 ];
 
                 const items = [
-                    new Item(ItemType.dexterityVest, 10, 20),
-                    new Item(ItemType.elixirOfTheMongose, 5, 7),
-                    new Item(ItemType.conjuredManaCake, 3, 6)
+                    new Item(ItemName.dexterityVest, 10, 20),
+                    new Item(ItemName.elixirOfTheMongose, 5, 7),
+                    new Item(ItemName.conjuredManaCake, 3, 6)
                 ];
 
                 const gildedRose = new Shop(items);
@@ -128,9 +128,9 @@ describe('how a shop assesses the quality of its items',
                 const passedSellIn = 0
 
                 const items = [
-                    new Item(ItemType.dexterityVest, passedSellIn, quality[0]),
-                    new Item(ItemType.elixirOfTheMongose, passedSellIn, quality[1]),
-                    new Item(ItemType.conjuredManaCake, passedSellIn, quality[2])
+                    new Item(ItemName.dexterityVest, passedSellIn, quality[0]),
+                    new Item(ItemName.elixirOfTheMongose, passedSellIn, quality[1]),
+                    new Item(ItemName.conjuredManaCake, passedSellIn, quality[2])
                 ];
 
                 const gildedRose = new Shop(items);
@@ -153,8 +153,8 @@ describe('how a shop assesses the quality of its items',
                 const sulfuraQuality = Item.SULFURA_QUALITY;
 
                 const items = [
-                    new Item(ItemType.sulfurasHandOfRagnaros, sellIns[0], sulfuraQuality),
-                    new Item(ItemType.sulfurasHandOfRagnaros, sellIns[1], sulfuraQuality),
+                    new Item(ItemName.sulfurasHandOfRagnaros, sellIns[0], sulfuraQuality),
+                    new Item(ItemName.sulfurasHandOfRagnaros, sellIns[1], sulfuraQuality),
                 ];
 
                 const gildedRose = new Shop(items);
@@ -176,7 +176,7 @@ describe('how a shop assesses the quality of its items',
 
                 qualities.forEach((q) => {
                     const items = [
-                        new Item(ItemType.agedBrie, 2, q.startsAt),
+                        new Item(ItemName.agedBrie, 2, q.startsAt),
                     ];
 
                     const gildedRose = new Shop(items);
@@ -205,9 +205,9 @@ describe('how a shop assesses the quality of its items',
 
                 quality.forEach((q) => {
                     const items = [
-                        new Item(ItemType.backstagePasses, 15, q[0].startsAt),
-                        new Item(ItemType.backstagePasses, 10, q[1].startsAt),
-                        new Item(ItemType.backstagePasses, 5, q[2].startsAt),
+                        new Item(ItemName.backstagePasses, 15, q[0].startsAt),
+                        new Item(ItemName.backstagePasses, 10, q[1].startsAt),
+                        new Item(ItemName.backstagePasses, 5, q[2].startsAt),
                     ];
 
                     const gildedRose = new Shop(items);
@@ -237,7 +237,7 @@ describe('how a shop assesses the quality of its items',
                 ];
 
                 const items = [
-                    new Item(ItemType.backstagePasses, sellIn[0], quality[0]),
+                    new Item(ItemName.backstagePasses, sellIn[0], quality[0]),
                 ];
 
                 const gildedRose = new Shop(items);
@@ -261,8 +261,8 @@ describe('how a shop assesses the quality of its items',
                 ];
 
                 const items = [
-                    new Item(ItemType.backstagePasses, sellIn[0], quality[0]),
-                    new Item(ItemType.backstagePasses, sellIn[1], quality[1]),
+                    new Item(ItemName.backstagePasses, sellIn[0], quality[0]),
+                    new Item(ItemName.backstagePasses, sellIn[1], quality[1]),
                 ];
 
                 const gildedRose = new Shop(items);

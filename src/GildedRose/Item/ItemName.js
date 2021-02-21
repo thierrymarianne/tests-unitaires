@@ -1,5 +1,5 @@
 
-const ItemType = {
+const ItemName = {
     dexterityVest: '+5 Dexterity Vest',
     agedBrie: 'Aged Brie',
     elixirOfTheMongose: 'Elixir of the Mongoose',
@@ -8,4 +8,4 @@ const ItemType = {
     conjuredManaCake: 'Conjured Mana Cake',
 };
 
-module.exports = ItemType;
+module.exports = ItemName;

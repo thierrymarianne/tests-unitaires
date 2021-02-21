@@ -1,8 +1,8 @@
 
 const Item = require('./Item.js');
-const ItemType = require('./ItemTypes.js');
+const ItemName = require('./ItemName.js');
 
 module.exports = {
     Item,
-    ItemType,
+    ItemName,
 };

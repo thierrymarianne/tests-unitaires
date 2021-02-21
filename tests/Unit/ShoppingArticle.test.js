@@ -1,4 +1,4 @@
-const {Item, ItemType} = require('../../src/GildedRose/Item');
+const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {ShoppingArticle} = require('../../src/GildedRose/Shop');
 
 describe('Shopping article', () => {
@@ -18,7 +18,7 @@ describe('Shopping article', () => {
         () => {
             expect(() => {
                 ShoppingArticle.from(
-                    new Item('Item having defects', 0, -1)
+                    new Item(ItemName.sulfurasHandOfRagnaros, 0, -1)
                 );
             }).toThrow('Item\'s quality is not good enough.')
         }
@@ -29,7 +29,7 @@ describe('Shopping article', () => {
         () => {
             const sellIn = 1;
             const quality = 2;
-            const name = ItemType.agedBrie;
+            const name = ItemName.agedBrie;
 
             const article = ShoppingArticle.from(
                 new Item(name, sellIn, quality)

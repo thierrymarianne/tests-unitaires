@@ -1,5 +1,5 @@
 
-const {Item} = require('../Item');
+const {Item, ItemName} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
 class ShoppingArticle {
