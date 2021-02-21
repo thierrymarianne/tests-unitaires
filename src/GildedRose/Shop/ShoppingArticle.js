@@ -1,9 +1,14 @@
 const {Item} = require('../Item');
+const {QualityAssurance} = require('../../GildedRose');
 
 class ShoppingArticle {
     constructor(item) {
         if (!(item instanceof Item)) {
             throw 'An instance of Item is required.'
+        }
+
+        if (!QualityAssurance.isOfAcceptableQuality(item)) {
+            throw 'Item\'s quality is not good enough.'
         }
 
         this.item = item

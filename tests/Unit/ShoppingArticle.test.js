@@ -14,6 +14,17 @@ describe('Shopping article', () => {
     );
 
     it(
+        'fails at wrapping an item of non-acceptable quality.',
+        () => {
+            expect(() => {
+                ShoppingArticle.from(
+                    new Item('Item having defects', 0, -1)
+                );
+            }).toThrow('Item\'s quality is not good enough.')
+        }
+    );
+
+    it(
         'exposes the quality, sellIn and name of an item available in a shop.',
         () => {
             const sellIn = 1;
