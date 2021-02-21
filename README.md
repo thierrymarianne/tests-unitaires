@@ -48,7 +48,9 @@ Juste une précision, un produit ne peut jamais voir sa qualité augmenter au-de
 
 ## Liste d'actions à mener
 
-- [ ] Extraire la classe `Item` 
-- [ ] Extraire la classe `Shop` 
-- [ ] Ajout d'une méthode `updateQuality` à la classe Item
-
+ - [x] Extraire la classe `Item` 
+ - [x] Extraire la classe `Shop` 
+ - [x] Introduire un module `GildedRose` 
+ - [x] Ajout d'une méthode `updateQuality` à la classe `Item`
+ - [x] Mettre en évidence qu'il s'agit bien d'un test s'assurant  
+   d'une bonne interaction entre les classes `Item` et `Shop`
