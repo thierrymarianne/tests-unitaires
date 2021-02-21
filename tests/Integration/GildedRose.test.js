@@ -2,8 +2,10 @@ const { Item, Shop } = require("../../src/GildedRose");
 
 describe("Gilded Rose", function () {
   it("should foo", function () {
+    const dexterityVest  = "+5 Dexterity Vest";
+
     const items = [
-      new Item("+5 Dexterity Vest", 10, 20),
+      new Item(dexterityVest, 10, 20),
       new Item("Aged Brie", 2, 0),
       new Item("Elixir of the Mongoose", 5, 7),
       new Item("Sulfuras, Hand of Ragnaros", 0, 80),
@@ -17,6 +19,6 @@ describe("Gilded Rose", function () {
 
     const gildedRose = new Shop(items);
     const updatedItems = gildedRose.updateQuality();
-    expect(updatedItems[0].name).toBe("fixme");
+    expect(updatedItems[0].name).toBe(dexterityVest);
   });
 });
