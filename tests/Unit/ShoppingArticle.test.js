@@ -25,6 +25,19 @@ describe('Shopping article', () => {
     );
 
     it(
+        'fails at wrapping an unknown item.',
+        () => {
+            const itemName = 'Unknown item name';
+
+            expect(() => {
+                ShoppingArticle.from(
+                    new Item(itemName, 0, 0)
+                );
+            }).toThrow(`Can not find item in shop by name: "${itemName}"`)
+        }
+    );
+
+    it(
         'exposes the quality, sellIn and name of an item available in a shop.',
         () => {
             const sellIn = 1;

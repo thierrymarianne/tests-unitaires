@@ -27,8 +27,18 @@ class ShoppingArticle {
         return this.item.quality;
     }
 
+    isInShopCatalogue() {
+        return Object.values(ItemName).includes(this.name());
+    }
+
     static from(item) {
-        return new ShoppingArticle(item);
+        const shoppingArticle = new ShoppingArticle(item);
+
+        if (!shoppingArticle.isInShopCatalogue()) {
+            throw `Can not find item in shop by name: "${shoppingArticle.name()}"`
+        }
+
+        return shoppingArticle;
     }
 }
 
