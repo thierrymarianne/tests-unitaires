@@ -1,3 +1,4 @@
+
 const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {ShoppingArticle} = require('../../src/GildedRose/Shop');
 
