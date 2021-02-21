@@ -27,6 +27,23 @@ class ShoppingArticle {
         return this.item.quality;
     }
 
+    amendQuality(quality) {
+        if (quality < 0) {
+            throw 'Quality can not be negative.'
+        }
+
+        if (quality > QualityAssurance.MAX_QUALITY) {
+            throw `Quality can not be greater than ${QualityAssurance.MAX_QUALITY}.`
+        }
+
+        return new ShoppingArticle(
+            new Item(
+                this.name(),
+                this.sellIn(),
+                quality
+            )
+        );
+    }
 
     amendSellIn(sellIn) {
         if (this.sellIn() < sellIn) {

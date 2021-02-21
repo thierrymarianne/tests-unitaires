@@ -100,4 +100,32 @@ describe('Shopping article', () => {
                 .toThrow('Can not amend sellIn (inconsistent order)');
         }
     );
+
+    it(
+        'can not amend quality with negative value.',
+        () => {
+            const sellIn = 1;
+            const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
+            const name = ItemName.agedBrie;
+
+            expect(() => ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendQuality(-1))
+            .toThrow('Quality can not be negative');
+        }
+    );
+
+    it(
+        'can not amend quality with a value above the quality threshold.',
+        () => {
+            const sellIn = 1;
+            const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
+            const name = ItemName.agedBrie;
+
+            expect(() => ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendQuality(51))
+            .toThrow('Quality can not be greater than 50.');
+        }
+    );
 });
