@@ -1,6 +1,7 @@
 
 const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {ShoppingArticle} = require('../../src/GildedRose/Shop');
+const {QualityAssurance} = require('../../src/GildedRose');
 
 describe('Shopping article', () => {
     it(
@@ -68,6 +69,35 @@ describe('Shopping article', () => {
                     new Item(name, sellIn, invalidQuality)
                 );
             }).toThrow('Quality of "Sulfuras, Hand of Ragnaros" items has to be compliant with a standard of 80.');
+        }
+    );
+
+    it(
+        'amends sellIn.',
+        () => {
+                const sellIn = 1;
+                const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
+                const name = ItemName.sulfurasHandOfRagnaros;
+
+                const article = ShoppingArticle.from(
+                    new Item(name, sellIn, quality)
+                ).amendSellIn(0);
+
+                expect(article.sellIn()).toBe(0);
+        }
+    );
+
+    it(
+        'can not amend sellIn consistently with time.',
+        () => {
+                const sellIn = 1;
+                const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
+                const name = ItemName.sulfurasHandOfRagnaros;
+
+                expect(() => ShoppingArticle.from(
+                    new Item(name, sellIn, quality)
+                ).amendSellIn(2))
+                .toThrow('Can not amend sellIn (inconsistent order)');
         }
     );
 });

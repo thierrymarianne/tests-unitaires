@@ -27,6 +27,21 @@ class ShoppingArticle {
         return this.item.quality;
     }
 
+
+    amendSellIn(sellIn) {
+        if (this.sellIn() < sellIn) {
+            throw 'Can not amend sellIn (inconsistent order)'
+        }
+
+        return new ShoppingArticle(
+            new Item(
+                this.name(),
+                sellIn,
+                this.quality()
+            )
+        );
+    }
+
     isNotInShopCatalogue() {
         return ! Object.values(ItemName).includes(this.name());
     }
