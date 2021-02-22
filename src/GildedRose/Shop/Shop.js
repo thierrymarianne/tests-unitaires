@@ -28,19 +28,19 @@ class Shop {
                         }
                     }
                 } else {
-                    if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                    if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
                         shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
 
                         if (
                             shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses)
                         ) {
                             if (shoppingArticle.sellIn() < 11) {
-                                if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                                if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                                 }
                             }
                             if (shoppingArticle.sellIn() < 6) {
-                                if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                                if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                                 }
                             }
@@ -66,7 +66,7 @@ class Shop {
                             shoppingArticle = shoppingArticle.amendQuality(0);
                         }
                     } else {
-                        if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                        if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
                             shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                         }
                     }

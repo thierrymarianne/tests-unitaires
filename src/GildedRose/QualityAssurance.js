@@ -1,6 +1,10 @@
 const {ItemName} = require('./Item');
 
 class QualityAssurance {
+    static isBelowTheQualityStandard(shoppingArticle) {
+        return shoppingArticle.quality() < QualityAssurance.MAX_QUALITY;
+    }
+
     static isOfAcceptableQuality(item) {
         return !isNaN(item.quality) && item.quality >= 0;
     }
