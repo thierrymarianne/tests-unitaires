@@ -176,6 +176,24 @@ describe('Shopping article', () => {
     );
 
     it(
+        'is responsible for its own quality assessment.',
+        () => {
+            const sellIn = 1;
+            const someQuality = 1;
+            const name = ItemName.agedBrie;
+
+            expect(ShoppingArticle.from(
+                new Item(name, sellIn, someQuality)
+            ).hasSomeQualityLeft()).toBe(true);
+
+            const noQuality = 0;
+            expect(ShoppingArticle.from(
+                new Item(name, sellIn, noQuality)
+            ).hasSomeQualityLeft()).toBe(false);
+        }
+    );
+
+    it(
         'can not amend quality with a value above the quality threshold.',
         () => {
             const sellIn = 1;

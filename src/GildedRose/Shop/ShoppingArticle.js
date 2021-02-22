@@ -39,6 +39,10 @@ class ShoppingArticle {
         return this.item.quality;
     }
 
+    hasSomeQualityLeft() {
+        return this.quality() > 0;
+    }
+
     isSulfurasItem() {
         return this.name() === ItemName.sulfurasHandOfRagnaros;
     }

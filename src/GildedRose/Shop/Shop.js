@@ -22,7 +22,7 @@ class Shop {
                     shoppingArticle.isNotReferencedUnderTheName(ItemName.agedBrie) &&
                     shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
                 ) {
-                    if (shoppingArticle.quality() > 0) {
+                    if (shoppingArticle.hasSomeQualityLeft()) {
                         if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
                             shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
                         }
@@ -57,7 +57,7 @@ class Shop {
                         if (
                             shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
                         ) {
-                            if (shoppingArticle.quality() > 0) {
+                            if (shoppingArticle.hasSomeQualityLeft()) {
                                 if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
                                 }
