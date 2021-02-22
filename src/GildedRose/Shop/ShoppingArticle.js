@@ -58,9 +58,15 @@ class ShoppingArticle {
     deriveQualityFromSellIn() {
         let shoppingArticle = this;
 
-        if (this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-            shoppingArticle = this.amendSellIn(this.sellIn() - 1);
-        }
+        shoppingArticle = shoppingArticle.chainSellInAmendments(
+            s => {
+                if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
+                    return s - 1;
+                }
+
+                return s;
+            }
+        );
 
         if (!this.hasExpirationDatePassed()) {
             return shoppingArticle;
@@ -147,7 +153,7 @@ class ShoppingArticle {
             throw 'Can not amend sellIn (inconsistent order).'
         }
 
-        if (this.isSulfurasItem()) {
+        if (this.isSulfurasItem() && sellIn !== this.sellIn()) {
             throw 'Can not amend sellIn of "Sulfuras" items.'
         }
 
