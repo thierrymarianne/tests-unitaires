@@ -23,6 +23,10 @@ class ShoppingArticle {
         return this.item.sellIn;
     }
 
+    hasExpirationDatePassed() {
+        return this.sellIn() < 0;
+    }
+
     isReferencedUnderTheName(name) {
         return this.name() === name;
     }

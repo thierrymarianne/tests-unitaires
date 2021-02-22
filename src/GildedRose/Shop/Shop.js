@@ -52,7 +52,7 @@ class Shop {
                     shoppingArticle = shoppingArticle.amendSellIn(shoppingArticle.sellIn() - 1);
                 }
 
-                if (shoppingArticle.sellIn() < 0) {
+                if (shoppingArticle.hasExpirationDatePassed()) {
                     if (shoppingArticle.isNotReferencedUnderTheName(ItemName.agedBrie)) {
                         if (
                             shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
