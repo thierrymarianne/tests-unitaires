@@ -37,28 +37,70 @@ class ShoppingArticle {
 
     deriveQualityFromSellIn() {
         if (!this.hasExpirationDatePassed()) {
-            return this;
+            return ShoppingArticle.from(
+                new Item(
+                    this.name(),
+                    this.sellIn(),
+                    this.quality()
+                )
+            );
         }
 
-        let shoppingArticle = this;
+        let shoppingArticle = ShoppingArticle.from(
+            new Item(
+                this.name(),
+                this.sellIn(),
+                this.quality()
+            )
+        );
 
         if (this.isReferencedUnderTheName(ItemName.agedBrie)) {
-            if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                shoppingArticle = shoppingArticle.chainQualityAmendments(q => q + 1);
+            shoppingArticle = shoppingArticle.chainQualityAmendments(q => {
+                if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
+                    return q + 1;
+                }
+
+                return q
+            });
+
+            return ShoppingArticle.from(
+                new Item(
+                    this.name(),
+                    this.sellIn(),
+                    shoppingArticle.quality()
+                )
+            );
+        }
+
+        if (
+            this.isNotReferencedUnderTheName(ItemName.backstagePasses)
+        ) {
+            if (this.hasSomeQualityLeft()) {
+                if (this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
+                    shoppingArticle = shoppingArticle.chainQualityAmendments(q => q - 1);
+
+                    return ShoppingArticle.from(
+                        new Item(
+                            this.name(),
+                            this.sellIn(),
+                            shoppingArticle.quality()
+                        )
+                    );
+                }
             }
         } else {
-            if (
-                this.isNotReferencedUnderTheName(ItemName.backstagePasses)
-            ) {
-                if (this.hasSomeQualityLeft()) {
-                    if (this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                        shoppingArticle = shoppingArticle.chainQualityAmendments(q => q - 1);
-                    }
-                }
-            } else {
-                shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
-            }
+            shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
+
+            return ShoppingArticle.from(
+                new Item(
+                    this.name(),
+                    this.sellIn(),
+                    shoppingArticle.quality()
+                )
+            );
         }
+
+        shoppingArticle = shoppingArticle.chainQualityAmendments(q => q);
 
         return ShoppingArticle.from(
             new Item(
@@ -98,7 +140,10 @@ class ShoppingArticle {
             throw 'Quality can not be negative.'
         }
 
-        if (quality > QualityAssurance.MAX_QUALITY) {
+        if (
+            quality > QualityAssurance.MAX_QUALITY &&
+            !this.isSulfurasItem()
+        ) {
             throw `Quality can not be greater than ${QualityAssurance.MAX_QUALITY}.`
         }
 
