@@ -19,6 +19,14 @@ class ShoppingArticle {
         return this.item.name;
     }
 
+    isReferencedUnderTheName(name) {
+        return this.name() === name;
+    }
+
+    isNotReferencedUnderTheName(name) {
+        return ! this.isReferencedUnderTheName(name);
+    }
+
     sellIn() {
         return this.item.sellIn;
     }
@@ -27,12 +35,38 @@ class ShoppingArticle {
         return this.sellIn() < 0;
     }
 
-    isReferencedUnderTheName(name) {
-        return this.name() === name;
-    }
+    deriveQualityFromSellIn() {
+        if (!this.hasExpirationDatePassed()) {
+            return this;
+        }
 
-    isNotReferencedUnderTheName(name) {
-        return ! this.isReferencedUnderTheName(name);
+        let shoppingArticle = this;
+
+        if (this.isNotReferencedUnderTheName(ItemName.agedBrie)) {
+            if (
+                this.isNotReferencedUnderTheName(ItemName.backstagePasses)
+            ) {
+                if (this.hasSomeQualityLeft()) {
+                    if (this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
+                        shoppingArticle = shoppingArticle.chainQualityAmendments(q => q - 1);
+                    }
+                }
+            } else {
+                shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
+            }
+        } else {
+            if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
+                shoppingArticle = shoppingArticle.chainQualityAmendments(q => q + 1);
+            }
+        }
+
+        return ShoppingArticle.from(
+            new Item(
+                this.name(),
+                this.sellIn(),
+                shoppingArticle.quality()
+            )
+        );
     }
 
     quality() {

@@ -60,27 +60,7 @@ class Shop {
                     shoppingArticle = shoppingArticle.amendSellIn(shoppingArticle.sellIn() - 1);
                 }
 
-                if (shoppingArticle.hasExpirationDatePassed()) {
-                    if (shoppingArticle.isNotReferencedUnderTheName(ItemName.agedBrie)) {
-                        if (
-                            shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
-                        ) {
-                            if (shoppingArticle.hasSomeQualityLeft()) {
-                                if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                                    shoppingArticle = shoppingArticle.chainQualityAmendments(q => q - 1);
-                                }
-                            }
-                        } else {
-                            shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
-                        }
-                    } else {
-                        if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                            shoppingArticle = shoppingArticle.chainQualityAmendments(q => q + 1);
-                        }
-                    }
-                }
-
-                return shoppingArticle
+                return shoppingArticle.deriveQualityFromSellIn();
             })(i);
 
             items.push(article.unwrapItem());
