@@ -17,45 +17,50 @@ class Shop {
             const article = ((n) => {
                 let shoppingArticle = this.cart.nthShoppingArticle(n);
 
-                if (shoppingArticle.belongsToCategoryOfArticlesWhichQualityCanIncreaseOverTime()) {
-                    if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                        shoppingArticle = shoppingArticle.chainQualityAmendments(
-                            q => q + 1
-                        );
-
-                        if (
-                            shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses)
-                        ) {
-                            if (shoppingArticle.sellIn() < 11) {
-                                if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                                    shoppingArticle = shoppingArticle.chainQualityAmendments(
-                                        q => q + 1
-                                    );
-                                }
+                if (shoppingArticle.belongsToCategoryOfArticlesWhichQualityDecreasesOverTime()) {
+                    return shoppingArticle.chainQualityAmendments(
+                        q => {
+                            if (
+                                shoppingArticle.hasSomeQualityLeft() &&
+                                shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
+                            ) {
+                                return q - 1;
                             }
 
-                            if (shoppingArticle.sellIn() < 6) {
-                                if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                                    shoppingArticle = shoppingArticle.chainQualityAmendments(
-                                        q => q + 1
-                                    );
-                                }
-                            }
+                            return q;
                         }
-                    }
-
-                    return shoppingArticle.deriveQualityFromSellIn();
+                    ).deriveQualityFromSellIn()
                 }
 
-                if (shoppingArticle.hasSomeQualityLeft()) {
-                    if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                        shoppingArticle = shoppingArticle.chainQualityAmendments(
-                            q => q - 1
-                        );
-                    }
+                if (QualityAssurance.hasShoppingArticleMetTheQualityStandard(shoppingArticle)) {
+                    return shoppingArticle;
                 }
 
-                return shoppingArticle.deriveQualityFromSellIn();
+                return shoppingArticle.chainQualityAmendments(
+                    q => q + 1,
+                    q => {
+                        if (
+                            shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses) &&
+                            QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle) &&
+                            shoppingArticle.sellIn() < 11
+                        ) {
+                            return q + 1;
+                        }
+
+                        return q;
+                    },
+                    q => {
+                        if (
+                            shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses) &&
+                            QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle) &&
+                            shoppingArticle.sellIn() < 6
+                        ) {
+                            return q + 1;
+                        }
+
+                        return q;
+                    }
+                ).deriveQualityFromSellIn();
             })(i);
 
             items.push(article.unwrapItem());

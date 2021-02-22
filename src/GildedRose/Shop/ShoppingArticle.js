@@ -52,6 +52,10 @@ class ShoppingArticle {
             this.isReferencedUnderTheName(ItemName.backstagePasses);
     }
 
+    belongsToCategoryOfArticlesWhichQualityDecreasesOverTime() {
+        return !this.belongsToCategoryOfArticlesWhichQualityCanIncreaseOverTime();
+    }
+
     sellIn() {
         return this.item.sellIn;
     }

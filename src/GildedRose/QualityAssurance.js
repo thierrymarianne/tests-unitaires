@@ -5,6 +5,10 @@ class QualityAssurance {
         return shoppingArticle.quality() < QualityAssurance.MAX_QUALITY;
     }
 
+    static hasShoppingArticleMetTheQualityStandard(shoppingArticle) {
+        return shoppingArticle.quality() === QualityAssurance.MAX_QUALITY;
+    }
+
     static isOfAcceptableQuality(item) {
         return !isNaN(item.quality) && item.quality >= 0;
     }
