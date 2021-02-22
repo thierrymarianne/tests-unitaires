@@ -13,10 +13,8 @@ class Shop {
     assessQualityOfShoppingArticlesInCart() {
         const items = [];
 
-        for (let i = 0; i < this.cart.articles().length; i++) {
-            const article = ((n) => {
-                let shoppingArticle = this.cart.nthShoppingArticle(n);
-
+        this.cart.articles().map(shoppingArticle => {
+            const article = (() => {
                 if (shoppingArticle.belongsToCategoryOfArticlesWhichQualityDecreasesOverTime()) {
                     return shoppingArticle.chainQualityAmendments(
                         q => {
@@ -61,10 +59,10 @@ class Shop {
                         return q;
                     }
                 ).deriveQualityFromSellIn();
-            })(i);
+            })();
 
             items.push(article.unwrapItem());
-        }
+        });
 
         this.items = items;
 
