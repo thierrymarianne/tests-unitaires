@@ -56,6 +56,22 @@ describe('Shopping article', () => {
     );
 
     it(
+        'does not carry a name',
+        () => {
+            const sellIn = 1;
+            const quality = 2;
+            const name = ItemName.agedBrie;
+
+            const article = ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            );
+
+            expect(article.isReferencedUnderTheName(name)).toBe(true);
+            expect(article.isNotReferencedUnderTheName(name)).toBe(false);
+        }
+    );
+
+    it(
         'unwraps an underlying Shop item',
         () => {
             const sellIn = 1;

@@ -23,6 +23,14 @@ class ShoppingArticle {
         return this.item.sellIn;
     }
 
+    isReferencedUnderTheName(name) {
+        return this.name() === name;
+    }
+
+    isNotReferencedUnderTheName(name) {
+        return ! this.isReferencedUnderTheName(name);
+    }
+
     quality() {
         return this.item.quality;
     }
