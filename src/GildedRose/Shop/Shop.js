@@ -19,11 +19,11 @@ class Shop {
                 let shoppingArticle = this.cart.nthShoppingArticle(n);
 
                 if (
-                    shoppingArticle.name() !== ItemName.agedBrie &&
-                    shoppingArticle.name() !== ItemName.backstagePasses
+                    shoppingArticle.isNotReferencedUnderTheName(ItemName.agedBrie) &&
+                    shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
                 ) {
                     if (shoppingArticle.quality() > 0) {
-                        if (shoppingArticle.name() !== ItemName.sulfurasHandOfRagnaros) {
+                        if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
                             shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
                         }
                     }
@@ -32,7 +32,7 @@ class Shop {
                         shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
 
                         if (
-                            shoppingArticle.name() === ItemName.backstagePasses
+                            shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses)
                         ) {
                             if (shoppingArticle.sellIn() < 11) {
                                 if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
@@ -48,17 +48,17 @@ class Shop {
                     }
                 }
 
-                if (shoppingArticle.name() !== ItemName.sulfurasHandOfRagnaros) {
+                if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
                     shoppingArticle = shoppingArticle.amendSellIn(shoppingArticle.sellIn() - 1);
                 }
 
                 if (shoppingArticle.sellIn() < 0) {
-                    if (shoppingArticle.name() !== ItemName.agedBrie) {
+                    if (shoppingArticle.isNotReferencedUnderTheName(ItemName.agedBrie)) {
                         if (
-                            shoppingArticle.name() !== ItemName.backstagePasses
+                            shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
                         ) {
                             if (shoppingArticle.quality() > 0) {
-                                if (shoppingArticle.name() !== ItemName.sulfurasHandOfRagnaros) {
+                                if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
                                 }
                             }
