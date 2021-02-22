@@ -1,10 +1,10 @@
-# GILDED ROSE - CODE QUALITY TEST
+# GILDED ROSE KATA
 
 ---
 
 ## Instructions
 
-Ce test est une mise en situation, tu arrives sur un nouveau projet avec un code de mauvaise qualité et ton client te demande de rajouter une fonctionnalité pour demain. Tu es conscient que tu ne seras plus sur ce projet après-demain, tu dois donc aussi faire en sortes que le prochain développeur puisse reprendre la main sur ce projet très facilement. A toi de jouer pour modifier le code et le rendre plus compréhensible.
+Cet exercice est une mise en situation, tu arrives sur un nouveau projet avec un code de mauvaise qualité et ton client te demande de rajouter une fonctionnalité pour demain. Tu es conscient que tu ne seras plus sur ce projet après-demain, tu dois donc aussi faire en sortes que le prochain développeur puisse reprendre la main sur ce projet très facilement. A toi de jouer pour modifier le code et le rendre plus compréhensible.
 
 Tu es totalement libre sur la manière de le faire du moment que c'est justifié.
 
