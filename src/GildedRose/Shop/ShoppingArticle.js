@@ -2,6 +2,9 @@
 const {Item, ItemName} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
+const BACKSTAGE_PASSES_QUALITY_10_DAYS_LEFT = 10
+const BACKSTAGE_PASSES_QUALITY_5_DAYS_LEFT = 5
+
 class QualityError extends Error {
     constructor(
         shoppingArticle,
@@ -103,7 +106,7 @@ class ShoppingArticle {
                 if (
                     shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses) &&
                     QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle) &&
-                    shoppingArticle.sellIn() < 11
+                    shoppingArticle.sellIn() <= BACKSTAGE_PASSES_QUALITY_10_DAYS_LEFT
                 ) {
                     return q + 1;
                 }
@@ -114,7 +117,7 @@ class ShoppingArticle {
                 if (
                     shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses) &&
                     QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle) &&
-                    shoppingArticle.sellIn() < 6
+                    shoppingArticle.sellIn() <= BACKSTAGE_PASSES_QUALITY_5_DAYS_LEFT
                 ) {
                     return q + 1;
                 }
