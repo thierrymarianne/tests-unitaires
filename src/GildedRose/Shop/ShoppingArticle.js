@@ -68,6 +68,10 @@ class ShoppingArticle {
         return this.sellIn() < 0;
     }
 
+    isNotStaleYet() {
+        return ! this.hasExpirationDatePassed();
+    }
+
     assessQualityAtTheEndOfTheDay() {
         const shoppingArticle = this;
 
@@ -140,7 +144,7 @@ class ShoppingArticle {
             }
         );
 
-        if (!this.hasExpirationDatePassed()) {
+        if (this.isNotStaleYet()) {
             return shoppingArticle;
         }
 
@@ -165,7 +169,8 @@ class ShoppingArticle {
             q => {
                 if (
                     shoppingArticle.hasSomeQualityLeft() &&
-                    shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
+                    shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros) &&
+                    shoppingArticle.belongsToCategoryOfArticlesWhichQualityDecreasesOverTime()
                 ) {
                     return q - 1;
                 }

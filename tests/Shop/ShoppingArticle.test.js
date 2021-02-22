@@ -160,6 +160,21 @@ describe('Shopping article', () => {
     );
 
     it(
+        'amends quality positively Aged Bried over time.',
+        () => {
+            const sellIn = -1;
+            const quality = 10;
+            const name = ItemName.agedBrie;
+
+            expect(ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+                ).deriveQualityFromSellIn()
+                .quality()
+            ).toBe(11)
+        }
+    );
+
+    it(
         'can not amend sellIn consistently with time.',
         () => {
             const sellIn = 1;
