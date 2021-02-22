@@ -57,6 +57,23 @@ describe('Shopping article', () => {
     );
 
     it(
+        'unwraps an underlying Shop item',
+        () => {
+            const sellIn = 1;
+            const quality = 2;
+            const name = ItemName.agedBrie;
+
+            const shopItem = new Item(name, sellIn, quality)
+
+            const shoppingArticle = ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            );
+
+            expect(shoppingArticle.unwrapItem()).toEqual(shopItem);
+        }
+    )
+
+    it(
         'prevents the quality of "Sulfuras" items from being wrongfully declared.',
         () => {
 

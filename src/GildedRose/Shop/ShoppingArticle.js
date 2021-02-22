@@ -12,7 +12,7 @@ class ShoppingArticle {
             throw 'Item\'s quality is not good enough.'
         }
 
-        this.item = new Item(item.name, item.sellIn(), item.quality());
+        this.item = new Item(item.name, item.sellIn, item.quality);
     }
 
     name() {
@@ -29,6 +29,10 @@ class ShoppingArticle {
 
     isSulfurasItem() {
         return this.name() === ItemName.sulfurasHandOfRagnaros;
+    }
+
+    unwrapItem() {
+        return this.item;
     }
 
     amendQuality(quality) {
