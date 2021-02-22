@@ -15,6 +15,14 @@ class Cart {
     articles() {
         return this.shoppingArticles;
     }
+
+    nthShoppingArticle(n) {
+        if (typeof this.shoppingArticles[n] === 'undefined') {
+            throw `Can not find nth article with n being equal to ${n}`;
+        }
+
+        return this.shoppingArticles[n];
+    }
 }
 
 module.exports = Cart;

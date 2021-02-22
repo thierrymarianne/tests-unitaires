@@ -67,5 +67,28 @@ describe(
                 expect(cartArticles[3].quality()).toBe(20);
             }
         );
+
+        it(
+            'allows picking the nth article added to the cart',
+            () => {
+                const articles = [
+                    new ShoppingArticle(
+                        new Item(ItemName.agedBrie, 1, 2),
+                    ),
+                    new ShoppingArticle(
+                        new Item(ItemName.sulfurasHandOfRagnaros, 15, 50),
+                    ),
+                    new ShoppingArticle(
+                        new Item(ItemName.dexterityVest, 3, 20),
+                    )
+                ];
+
+                const cart = new Cart(articles);
+
+                expect(cart.nthShoppingArticle(0)).toBe(articles[0]);
+                expect(cart.nthShoppingArticle(1)).toBe(articles[1]);
+                expect(cart.nthShoppingArticle(2)).toBe(articles[2]);
+            }
+        )
     }
 );
