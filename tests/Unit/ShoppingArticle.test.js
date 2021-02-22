@@ -85,7 +85,7 @@ describe('Shopping article', () => {
                 .toThrow('Quality of "Sulfuras, Hand of Ragnaros" items has to be compliant with a standard of 80.');
         }
     );
-    
+
     it(
         'amends sellIn.',
         () => {

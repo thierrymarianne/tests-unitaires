@@ -12,7 +12,7 @@ class ShoppingArticle {
             throw 'Item\'s quality is not good enough.'
         }
 
-        this.item = item
+        this.item = new Item(item.name, item.sellIn(), item.quality());
     }
 
     name() {
