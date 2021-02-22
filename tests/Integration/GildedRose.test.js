@@ -3,7 +3,7 @@ const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {QualityAssurance} = require('../../src/GildedRose');
 
 describe(
-    'GildRose',
+    'GildedRose',
     () => {
         it(
             'preserves the names of items in a shop.',
