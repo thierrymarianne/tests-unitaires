@@ -76,7 +76,8 @@ describe('Shopping article', () => {
         'amends sellIn.',
         () => {
                 const sellIn = 1;
-                const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
+                const quality = 10;
+                const name = ItemName.dexterityVest;
 
                 const article = ShoppingArticle.from(
                     new Item(name, sellIn, quality)
@@ -90,8 +91,8 @@ describe('Shopping article', () => {
         'can not amend sellIn consistently with time.',
         () => {
                 const sellIn = 1;
-                const name = ItemName.sulfurasHandOfRagnaros;
-                const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
+                const quality = 20;
+                const name = ItemName.dexterityVest;
 
                 expect(() => ShoppingArticle.from(
                     new Item(name, sellIn, quality)
@@ -104,7 +105,7 @@ describe('Shopping article', () => {
         'can not amend quality with negative value.',
         () => {
             const sellIn = 1;
-            const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
+            const quality = 30;
             const name = ItemName.agedBrie;
 
             expect(() => ShoppingArticle.from(
