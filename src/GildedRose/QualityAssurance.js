@@ -1,3 +1,4 @@
+
 const {ItemName} = require('./Item');
 
 class QualityAssurance {

@@ -12,8 +12,10 @@ class Cart {
         })
     }
 
-    articles() {
-        return this.shoppingArticles;
+    assessQuality() {
+        return this.shoppingArticles.map(shoppingArticle =>
+            shoppingArticle.assessQualityAtTheEndOfTheDay().unwrapItem()
+        );
     }
 }
 

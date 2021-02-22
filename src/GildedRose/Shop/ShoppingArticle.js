@@ -1,3 +1,4 @@
+
 const {Item, ItemName} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
@@ -62,6 +63,65 @@ class ShoppingArticle {
 
     hasExpirationDatePassed() {
         return this.sellIn() < 0;
+    }
+
+    assessQualityAtTheEndOfTheDay() {
+        const shoppingArticle = this;
+
+        if (shoppingArticle.belongsToCategoryOfArticlesWhichQualityDecreasesOverTime()) {
+            return shoppingArticle.chainQualityAmendments(
+                q => {
+                    if (
+                        shoppingArticle.hasSomeQualityLeft() &&
+                        shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
+                    ) {
+                        return q - 1;
+                    }
+
+                    return q;
+                },
+                q => {
+                    if (
+                        shoppingArticle.hasSomeQualityLeft() &&
+                        shoppingArticle.isReferencedUnderTheName(ItemName.conjuredManaCake)
+                    ) {
+                        return q - 1;
+                    }
+
+                    return q;
+                }
+            ).deriveQualityFromSellIn()
+        }
+
+        if (QualityAssurance.hasShoppingArticleMetTheQualityStandard(shoppingArticle)) {
+            return shoppingArticle;
+        }
+
+        return shoppingArticle.chainQualityAmendments(
+            q => q + 1,
+            q => {
+                if (
+                    shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses) &&
+                    QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle) &&
+                    shoppingArticle.sellIn() < 11
+                ) {
+                    return q + 1;
+                }
+
+                return q;
+            },
+            q => {
+                if (
+                    shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses) &&
+                    QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle) &&
+                    shoppingArticle.sellIn() < 6
+                ) {
+                    return q + 1;
+                }
+
+                return q;
+            }
+        ).deriveQualityFromSellIn();
     }
 
     deriveQualityFromSellIn() {
