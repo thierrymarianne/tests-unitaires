@@ -11,7 +11,7 @@ class Shop {
     }
 
     updateQuality() {
-        return this.cart.assessQuality();
+        return this.cart.postQualityAssessementItems();
     }
 }
 

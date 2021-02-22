@@ -12,7 +12,7 @@ class Cart {
         })
     }
 
-    assessQuality() {
+    postQualityAssessementItems() {
         return this.shoppingArticles.map(shoppingArticle =>
             shoppingArticle.assessQualityAtTheEndOfTheDay().unwrapItem()
         );
