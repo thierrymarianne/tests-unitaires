@@ -74,7 +74,7 @@ class ShoppingArticle {
             throw `Can not find item in shop by name: "${shoppingArticle.name()}"`
         }
 
-        if (QualityAssurance.isNotOfStableQuality(shoppingArticle)) {
+        if (QualityAssurance.isNotOfStandardQuality(shoppingArticle)) {
             return shoppingArticle;
         }
 
