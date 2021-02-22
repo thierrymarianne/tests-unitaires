@@ -1,4 +1,3 @@
-
 const Cart = require('./Cart');
 const ShoppingArticle = require('./ShoppingArticle');
 
@@ -28,19 +27,19 @@ class Shop {
                         }
                     }
                 } else {
-                    if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
+                    if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
                         shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
 
                         if (
                             shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses)
                         ) {
                             if (shoppingArticle.sellIn() < 11) {
-                                if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
+                                if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                                 }
                             }
                             if (shoppingArticle.sellIn() < 6) {
-                                if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
+                                if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                                 }
                             }
@@ -66,7 +65,7 @@ class Shop {
                             shoppingArticle = shoppingArticle.amendQuality(0);
                         }
                     } else {
-                        if (QualityAssurance.isBelowTheQualityStandard(shoppingArticle)) {
+                        if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
                             shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                         }
                     }

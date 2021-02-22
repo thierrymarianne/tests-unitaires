@@ -1,7 +1,7 @@
 const {ItemName} = require('./Item');
 
 class QualityAssurance {
-    static isBelowTheQualityStandard(shoppingArticle) {
+    static isShoppingArticleBelowTheQualityStandard(shoppingArticle) {
         return shoppingArticle.quality() < QualityAssurance.MAX_QUALITY;
     }
 
