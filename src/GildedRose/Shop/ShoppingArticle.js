@@ -47,6 +47,11 @@ class ShoppingArticle {
         return !this.isReferencedUnderTheName(name);
     }
 
+    belongsToCategoryOfArticlesWhichQualityCanIncreaseOverTime() {
+        return this.isReferencedUnderTheName(ItemName.agedBrie) ||
+            this.isReferencedUnderTheName(ItemName.backstagePasses);
+    }
+
     sellIn() {
         return this.item.sellIn;
     }

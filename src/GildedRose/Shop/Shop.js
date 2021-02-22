@@ -17,18 +17,7 @@ class Shop {
             const article = ((n) => {
                 let shoppingArticle = this.cart.nthShoppingArticle(n);
 
-                if (
-                    shoppingArticle.isNotReferencedUnderTheName(ItemName.agedBrie) &&
-                    shoppingArticle.isNotReferencedUnderTheName(ItemName.backstagePasses)
-                ) {
-                    if (shoppingArticle.hasSomeQualityLeft()) {
-                        if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                            shoppingArticle = shoppingArticle.chainQualityAmendments(
-                                q => q - 1
-                            );
-                        }
-                    }
-                } else {
+                if (shoppingArticle.belongsToCategoryOfArticlesWhichQualityCanIncreaseOverTime()) {
                     if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
                         shoppingArticle = shoppingArticle.chainQualityAmendments(
                             q => q + 1
@@ -53,6 +42,16 @@ class Shop {
                                 }
                             }
                         }
+                    }
+
+                    return shoppingArticle.deriveQualityFromSellIn();
+                }
+
+                if (shoppingArticle.hasSomeQualityLeft()) {
+                    if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
+                        shoppingArticle = shoppingArticle.chainQualityAmendments(
+                            q => q - 1
+                        );
                     }
                 }
 
