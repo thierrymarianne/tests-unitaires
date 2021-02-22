@@ -1,4 +1,3 @@
-
 const {Item, ItemName} = require('../../src/GildedRose/Item');
 const {ShoppingArticle} = require('../../src/GildedRose/Shop');
 const {QualityAssurance} = require('../../src/GildedRose');
@@ -106,28 +105,28 @@ describe('Shopping article', () => {
     it(
         'amends sellIn.',
         () => {
-                const sellIn = 1;
-                const quality = 10;
-                const name = ItemName.dexterityVest;
+            const sellIn = 1;
+            const quality = 10;
+            const name = ItemName.dexterityVest;
 
-                const article = ShoppingArticle.from(
-                    new Item(name, sellIn, quality)
-                ).amendSellIn(0);
+            const article = ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendSellIn(0);
 
-                expect(article.sellIn()).toBe(0);
+            expect(article.sellIn()).toBe(0);
         }
     );
 
     it(
         'can not amend sellIn consistently with time.',
         () => {
-                const sellIn = 1;
-                const quality = 20;
-                const name = ItemName.dexterityVest;
+            const sellIn = 1;
+            const quality = 20;
+            const name = ItemName.dexterityVest;
 
-                expect(() => ShoppingArticle.from(
-                    new Item(name, sellIn, quality)
-                ).amendSellIn(2))
+            expect(() => ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendSellIn(2))
                 .toThrow('Can not amend sellIn (inconsistent order)');
         }
     );
@@ -156,7 +155,7 @@ describe('Shopping article', () => {
             expect(() => ShoppingArticle.from(
                 new Item(name, sellIn, quality)
             ).amendQuality(-1))
-            .toThrow('Quality can not be negative');
+                .toThrow('Quality can not be negative');
         }
     );
 
@@ -170,7 +169,7 @@ describe('Shopping article', () => {
             expect(() => ShoppingArticle.from(
                 new Item(name, sellIn, quality)
             ).amendQuality(51))
-            .toThrow('Quality can not be greater than 50.');
+                .toThrow('Quality can not be greater than 50.');
         }
     );
 });
