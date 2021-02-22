@@ -1,6 +1,24 @@
 const {Item, ItemName} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
+class QualityError extends Error {
+    constructor(
+        shoppingArticle,
+        message = [
+            `Quality can not be negative for `,
+            `shopping article referenced under "{name}" name.`
+        ].join('')
+    ) {
+        super(message.replace('{name}', shoppingArticle.name()));
+    }
+
+    static guardAgainstNegativeQuality(quality, shoppingArticle) {
+        if (quality < 0) {
+            throw new QualityError(shoppingArticle);
+        }
+    }
+}
+
 class ShoppingArticle {
     constructor(item) {
         if (!(item instanceof Item)) {
@@ -103,9 +121,7 @@ class ShoppingArticle {
     }
 
     amendQuality(quality) {
-        if (quality < 0) {
-            throw 'Quality can not be negative.'
-        }
+        QualityError.guardAgainstNegativeQuality(quality, this);
 
         if (
             quality > QualityAssurance.MAX_QUALITY &&
