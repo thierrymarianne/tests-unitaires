@@ -49,13 +49,13 @@ class ShoppingArticle {
             quality
         );
 
-        return new ShoppingArticle(
-            new Item(
-                this.name(),
-                this.sellIn(),
-                quality
-            )
+        this.item = new Item(
+            this.name(),
+            this.sellIn(),
+            quality
         );
+
+        return new ShoppingArticle(this.item);
     }
 
     amendSellIn(sellIn) {
@@ -67,13 +67,13 @@ class ShoppingArticle {
             throw 'Can not amend sellIn of "Sulfuras" items.'
         }
 
-        return new ShoppingArticle(
-            new Item(
-                this.name(),
-                sellIn,
-                this.quality()
-            )
+        this.item = new Item(
+            this.name(),
+            sellIn,
+            this.quality()
         );
+
+        return new ShoppingArticle(this.item);
     }
 
     isNotInShopCatalogue() {
