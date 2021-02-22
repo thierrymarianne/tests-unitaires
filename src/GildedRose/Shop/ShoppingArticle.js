@@ -81,6 +81,9 @@ class ShoppingArticle {
             return shoppingArticle;
         }
 
+        // Quality Amendments applied for shopping articles
+        // having a passed expiration date
+
         return shoppingArticle.chainQualityAmendments(
             q => {
                 if (
@@ -100,6 +103,16 @@ class ShoppingArticle {
                 if (
                     shoppingArticle.hasSomeQualityLeft() &&
                     shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
+                ) {
+                    return q - 1;
+                }
+
+                return q;
+            },
+            q => {
+                if (
+                    shoppingArticle.hasSomeQualityLeft() &&
+                    shoppingArticle.isReferencedUnderTheName(ItemName.conjuredManaCake)
                 ) {
                     return q - 1;
                 }

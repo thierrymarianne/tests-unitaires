@@ -1,6 +1,6 @@
-const {Item, ItemName} = require('../../src/GildedRose/Item');
-const {ShoppingArticle} = require('../../src/GildedRose/Shop');
-const {QualityAssurance} = require('../../src/GildedRose');
+const {Item, ItemName} = require('../src/GildedRose/Item');
+const {ShoppingArticle} = require('../src/GildedRose/Shop');
+const {QualityAssurance} = require('../src/GildedRose');
 
 describe('Shopping article', () => {
     it(

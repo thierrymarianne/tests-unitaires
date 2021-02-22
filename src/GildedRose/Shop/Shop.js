@@ -26,6 +26,16 @@ class Shop {
                             }
 
                             return q;
+                        },
+                        q => {
+                            if (
+                                shoppingArticle.hasSomeQualityLeft() &&
+                                shoppingArticle.isReferencedUnderTheName(ItemName.conjuredManaCake)
+                            ) {
+                                return q - 1;
+                            }
+
+                            return q;
                         }
                     ).deriveQualityFromSellIn()
                 }

@@ -1,9 +1,9 @@
-const {Shop} = require('../../src/GildedRose/Shop');
-const {Item, ItemName} = require('../../src/GildedRose/Item');
-const {QualityAssurance} = require('../../src/GildedRose');
+const {Shop} = require('../src/GildedRose/Shop');
+const {Item, ItemName} = require('../src/GildedRose/Item');
+const {QualityAssurance} = require('../src/GildedRose');
 
 describe(
-    'GildedRose',
+    'Shop',
     () => {
         it(
             'preserves the names of items in a shop.',
@@ -20,8 +20,8 @@ describe(
                     new Item(ItemName.conjuredManaCake, 3, 6)
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].name).toBe(ItemName.dexterityVest);
                 expect(updatedItems[1].name).toBe(ItemName.agedBrie);
@@ -58,8 +58,8 @@ describe(
                     new Item(ItemName.conjuredManaCake, 3, 6)
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].sellIn).toBe(sellIns[0] - 1);
                 expect(updatedItems[1].sellIn).toBe(sellIns[1] - 1);
@@ -84,8 +84,8 @@ describe(
                     new Item(ItemName.sulfurasHandOfRagnaros, -1, 80),
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].sellIn).toBe(sellIns[0]);
                 expect(updatedItems[1].sellIn).toBe(sellIns[1]);
@@ -98,24 +98,42 @@ describe(
                 const quality = [
                     20,
                     7,
+                    7,
+                ];
+
+                const items = [
+                    new Item(ItemName.dexterityVest, 10, quality[0]),
+                    new Item(ItemName.elixirOfTheMongose, 5, quality[1]),
+                    new Item(ItemName.elixirOfTheMongose, -1, quality[2]),
+                ];
+
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
+
+                expect(updatedItems[0].quality).toBe(quality[0] - 1);
+                expect(updatedItems[1].quality).toBe(quality[1] - 1);
+                expect(updatedItems[2].quality).toBe(quality[2] - 2);
+            }
+        );
+
+        it(
+            'decreases the quality of conjured items twice as fast as the quality of ordinary items.',
+            () => {
+                const quality = [
                     6,
                     4
                 ];
 
                 const items = [
-                    new Item(ItemName.dexterityVest, 10, 20),
-                    new Item(ItemName.elixirOfTheMongose, 5, 7),
-                    new Item(ItemName.conjuredManaCake, 3, 6),
-                    new Item(ItemName.conjuredManaCake, 0, 6)
+                    new Item(ItemName.conjuredManaCake, 3, quality[0]),
+                    new Item(ItemName.conjuredManaCake, 0, quality[1])
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
-                expect(updatedItems[0].quality).toBe(quality[0] - 1);
-                expect(updatedItems[1].quality).toBe(quality[1] - 1);
-                expect(updatedItems[2].quality).toBe(quality[2] - 2);
-                expect(updatedItems[2].quality).toBe(quality[3] - 4);
+                expect(updatedItems[0].quality).toBe(quality[0] - 2);
+                expect(updatedItems[1].quality).toBe(quality[1] - 4);
             }
         );
 
@@ -136,8 +154,8 @@ describe(
                     new Item(ItemName.conjuredManaCake, passedSellIn, quality[2])
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].quality).toBe(quality[0] - 2);
                 expect(updatedItems[1].quality).toBe(quality[1] - 2);
@@ -160,8 +178,8 @@ describe(
                     new Item(ItemName.sulfurasHandOfRagnaros, sellIns[1], sulfuraQuality),
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].quality).toBe(sulfuraQuality);
                 expect(updatedItems[1].quality).toBe(sulfuraQuality);
@@ -182,8 +200,8 @@ describe(
                         new Item(ItemName.agedBrie, 2, q.startsAt),
                     ];
 
-                    const gildedRose = new Shop(items);
-                    const updatedItems = gildedRose.updateQuality();
+                    const shop = new Shop(items);
+                    const updatedItems = shop.updateQuality();
 
                     expect(updatedItems[0].quality).toBe(q.eventuallyAssessedAt);
                 });
@@ -213,8 +231,8 @@ describe(
                         new Item(ItemName.backstagePasses, 5, q[2].startsAt),
                     ];
 
-                    const gildedRose = new Shop(items);
-                    const updatedItems = gildedRose.updateQuality();
+                    const shop = new Shop(items);
+                    const updatedItems = shop.updateQuality();
 
                     expect(updatedItems[0].quality)
                     .toBe(q[0].eventuallyAssessedAt);
@@ -243,8 +261,8 @@ describe(
                     new Item(ItemName.backstagePasses, sellIn[0], quality[0]),
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].quality).toBe(0);
             }
@@ -268,35 +286,11 @@ describe(
                     new Item(ItemName.backstagePasses, sellIn[1], quality[1]),
                 ];
 
-                const gildedRose = new Shop(items);
-                const updatedItems = gildedRose.updateQuality();
+                const shop = new Shop(items);
+                const updatedItems = shop.updateQuality();
 
                 expect(updatedItems[0].quality).toBe(quality[0] + 2);
                 expect(updatedItems[1].quality).toBe(quality[1] + 3);
-            }
-        );
-
-        it(
-            'assesses the quality of shopping articles in cart.',
-            () => {
-                const items = [
-                    new Item(ItemName.dexterityVest, 10, 20),
-                    new Item(ItemName.agedBrie, 2, 0),
-                    new Item(ItemName.elixirOfTheMongose, 5, 7),
-                    new Item(ItemName.sulfurasHandOfRagnaros, 0, 80),
-                    new Item(ItemName.sulfurasHandOfRagnaros, -1, 80),
-                    new Item(ItemName.backstagePasses, 15, 20),
-                    new Item(ItemName.backstagePasses, 10, 49),
-                    new Item(ItemName.backstagePasses, 5, 49),
-                    new Item(ItemName.conjuredManaCake, 3, 6)
-                ];
-
-                const gildedRose = new Shop(items);
-
-                const assessedItems = gildedRose.assessQualityOfItems();
-                const assessedCartItems = gildedRose.assessQualityOfShoppingArticlesInCart();
-
-                expect(assessedItems).toEqual(assessedCartItems);
             }
         );
     }

@@ -1,5 +1,5 @@
-const {Item, ItemName} = require('../../src/GildedRose/Item');
-const {QualityAssurance} = require('../../src/GildedRose');
+const {Item, ItemName} = require('../src/GildedRose/Item');
+const {QualityAssurance} = require('../src/GildedRose');
 
 describe('Quality assurance', () => {
     it(
