@@ -17,7 +17,6 @@ describe(
                     new Item(ItemName.backstagePasses, 15, 20),
                     new Item(ItemName.backstagePasses, 10, 49),
                     new Item(ItemName.backstagePasses, 5, 49),
-                    // this conjured item does not work properly yet
                     new Item(ItemName.conjuredManaCake, 3, 6)
                 ];
 
@@ -99,13 +98,15 @@ describe(
                 const quality = [
                     20,
                     7,
-                    6
+                    6,
+                    4
                 ];
 
                 const items = [
                     new Item(ItemName.dexterityVest, 10, 20),
                     new Item(ItemName.elixirOfTheMongose, 5, 7),
-                    new Item(ItemName.conjuredManaCake, 3, 6)
+                    new Item(ItemName.conjuredManaCake, 3, 6),
+                    new Item(ItemName.conjuredManaCake, 0, 6)
                 ];
 
                 const gildedRose = new Shop(items);
@@ -113,7 +114,8 @@ describe(
 
                 expect(updatedItems[0].quality).toBe(quality[0] - 1);
                 expect(updatedItems[1].quality).toBe(quality[1] - 1);
-                expect(updatedItems[2].quality).toBe(quality[2] - 1);
+                expect(updatedItems[2].quality).toBe(quality[2] - 2);
+                expect(updatedItems[2].quality).toBe(quality[3] - 4);
             }
         );
 
