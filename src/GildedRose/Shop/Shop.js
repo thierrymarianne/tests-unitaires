@@ -15,8 +15,8 @@ class Shop {
         const items = [];
 
         for (let i = 0; i < this.cart.articles().length; i++) {
-            const article = ((i) => {
-                let shoppingArticle = this.cart.nthShoppingArticle(i);
+            const article = ((n) => {
+                let shoppingArticle = this.cart.nthShoppingArticle(n);
 
                 if (
                     shoppingArticle.name() !== ItemName.agedBrie &&
@@ -34,12 +34,12 @@ class Shop {
                         if (
                             shoppingArticle.name() === ItemName.backstagePasses
                         ) {
-                            if (shoppingArticle.sellIn < 11) {
+                            if (shoppingArticle.sellIn() < 11) {
                                 if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                                 }
                             }
-                            if (shoppingArticle.sellIn < 6) {
+                            if (shoppingArticle.sellIn() < 6) {
                                 if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
                                     shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
                                 }
@@ -52,7 +52,7 @@ class Shop {
                     shoppingArticle = shoppingArticle.amendSellIn(shoppingArticle.sellIn() - 1);
                 }
 
-                if (shoppingArticle.sellIn < 0) {
+                if (shoppingArticle.sellIn() < 0) {
                     if (shoppingArticle.name() !== ItemName.agedBrie) {
                         if (
                             shoppingArticle.name() !== ItemName.backstagePasses
@@ -78,7 +78,9 @@ class Shop {
             items.push(article.unwrapItem());
         }
 
-        return items;
+        this.items = items;
+
+        return this.items;
     }
 
     assessQualityOfItems() {
@@ -141,7 +143,7 @@ class Shop {
     }
 
     updateQuality() {
-        return this.assessQualityOfItems()
+        return this.assessQualityOfShoppingArticlesInCart()
     }
 }
 
