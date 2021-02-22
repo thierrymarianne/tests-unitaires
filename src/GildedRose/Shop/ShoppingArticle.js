@@ -160,6 +160,14 @@ class ShoppingArticle {
         return new ShoppingArticle(this.item);
     }
 
+    chainSellInAmendments(...sellInAmendmentFns) {
+        return sellInAmendmentFns.reduce((shoppingArticle, amendSellIn) => {
+            const sellIn = amendSellIn(shoppingArticle.sellIn());
+
+            return shoppingArticle.amendSellIn(sellIn);
+        }, this);
+    }
+
     isNotInShopCatalogue() {
         return !Object.values(ItemName).includes(this.name());
     }

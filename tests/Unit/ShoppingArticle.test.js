@@ -130,6 +130,10 @@ describe('Shopping article', () => {
             ).amendSellIn(0);
 
             expect(article.sellIn()).toBe(0);
+            expect(article.chainSellInAmendments(
+                s => s - 1,
+                s => s - 5,
+            ).sellIn()).toBe(-6);
         }
     );
 
