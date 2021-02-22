@@ -1,4 +1,3 @@
-
 const {Item, ItemName} = require('../Item');
 const {QualityAssurance} = require('../../GildedRose');
 
@@ -24,7 +23,7 @@ class ShoppingArticle {
     }
 
     isNotReferencedUnderTheName(name) {
-        return ! this.isReferencedUnderTheName(name);
+        return !this.isReferencedUnderTheName(name);
     }
 
     sellIn() {
@@ -37,78 +36,46 @@ class ShoppingArticle {
 
     deriveQualityFromSellIn() {
         if (!this.hasExpirationDatePassed()) {
-            return ShoppingArticle.from(
-                new Item(
-                    this.name(),
-                    this.sellIn(),
-                    this.quality()
-                )
-            );
+            return this;
         }
 
-        let shoppingArticle = ShoppingArticle.from(
-            new Item(
-                this.name(),
-                this.sellIn(),
-                this.quality()
-            )
-        );
+        let shoppingArticle = this;
 
-        if (this.isReferencedUnderTheName(ItemName.agedBrie)) {
-            shoppingArticle = shoppingArticle.chainQualityAmendments(q => {
-                if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
+        shoppingArticle = shoppingArticle.chainQualityAmendments(
+            q => {
+                if (
+                    this.isReferencedUnderTheName(ItemName.agedBrie) &&
+                    QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)
+                ) {
                     return q + 1;
                 }
 
                 return q
-            });
-
-            return ShoppingArticle.from(
-                new Item(
-                    this.name(),
-                    this.sellIn(),
-                    shoppingArticle.quality()
-                )
-            );
-        }
-
-        if (
-            this.isNotReferencedUnderTheName(ItemName.backstagePasses)
-        ) {
-            if (this.hasSomeQualityLeft()) {
-                if (this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                    shoppingArticle = shoppingArticle.chainQualityAmendments(q => q - 1);
-
-                    return ShoppingArticle.from(
-                        new Item(
-                            this.name(),
-                            this.sellIn(),
-                            shoppingArticle.quality()
-                        )
-                    );
-                }
-            }
-        } else {
-            shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
-
-            return ShoppingArticle.from(
-                new Item(
-                    this.name(),
-                    this.sellIn(),
-                    shoppingArticle.quality()
-                )
-            );
-        }
-
-        shoppingArticle = shoppingArticle.chainQualityAmendments(q => q);
-
-        return ShoppingArticle.from(
-            new Item(
-                this.name(),
-                this.sellIn(),
-                shoppingArticle.quality()
-            )
+            },
         );
+
+        shoppingArticle = shoppingArticle.chainQualityAmendments(_ => {
+            if (this.isReferencedUnderTheName(ItemName.backstagePasses)) {
+                return 0
+            }
+
+            return _;
+        });
+
+        if (shoppingArticle.hasSomeQualityLeft()) {
+            return shoppingArticle.chainQualityAmendments(q => {
+                if (
+                    this.hasSomeQualityLeft() &&
+                    this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
+                ) {
+                    return q - 1;
+                }
+
+                return q;
+            });
+        }
+
+        return shoppingArticle;
     }
 
     quality() {
@@ -180,7 +147,7 @@ class ShoppingArticle {
     }
 
     isNotInShopCatalogue() {
-        return ! Object.values(ItemName).includes(this.name());
+        return !Object.values(ItemName).includes(this.name());
     }
 
     static from(item) {
