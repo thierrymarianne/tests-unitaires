@@ -60,7 +60,11 @@ class ShoppingArticle {
 
     amendSellIn(sellIn) {
         if (this.sellIn() < sellIn) {
-            throw 'Can not amend sellIn (inconsistent order)'
+            throw 'Can not amend sellIn (inconsistent order).'
+        }
+
+        if (this.isSulfurasItem()) {
+            throw 'Can not amend sellIn of "Sulfuras" items.'
         }
 
         return new ShoppingArticle(

@@ -133,6 +133,20 @@ describe('Shopping article', () => {
     );
 
     it(
+        'can not amend sellIn of "Sulfuras" items with time.',
+        () => {
+            const sellIn = 1;
+            const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
+            const name = ItemName.sulfurasHandOfRagnaros;
+
+            expect(() => ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendSellIn(0))
+                .toThrow('Can not amend sellIn of "Sulfuras" items.');
+        }
+    );
+
+    it(
         'can not amend quality with negative value.',
         () => {
             const sellIn = 1;
