@@ -53,47 +53,38 @@ class ShoppingArticle {
     }
 
     deriveQualityFromSellIn() {
-        if (!this.hasExpirationDatePassed()) {
-            return this;
-        }
-
         let shoppingArticle = this;
 
-        shoppingArticle = shoppingArticle.chainQualityAmendments(
+        if (!this.hasExpirationDatePassed()) {
+            return shoppingArticle;
+        }
+
+        return shoppingArticle.chainQualityAmendments(
             q => {
                 if (
-                    this.isReferencedUnderTheName(ItemName.agedBrie) &&
+                    shoppingArticle.isReferencedUnderTheName(ItemName.agedBrie) &&
                     QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)
                 ) {
                     return q + 1;
                 }
 
-                return q
+                if (shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses)) {
+                    return 0
+                }
+
+                return q;
             },
-        );
-
-        shoppingArticle = shoppingArticle.chainQualityAmendments(_ => {
-            if (this.isReferencedUnderTheName(ItemName.backstagePasses)) {
-                return 0
-            }
-
-            return _;
-        });
-
-        if (shoppingArticle.hasSomeQualityLeft()) {
-            return shoppingArticle.chainQualityAmendments(q => {
+            q => {
                 if (
-                    this.hasSomeQualityLeft() &&
-                    this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
+                    shoppingArticle.hasSomeQualityLeft() &&
+                    shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)
                 ) {
                     return q - 1;
                 }
 
                 return q;
-            });
-        }
-
-        return shoppingArticle;
+            }
+        );
     }
 
     quality() {
