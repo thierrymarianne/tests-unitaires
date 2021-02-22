@@ -128,4 +128,18 @@ describe('Shopping article', () => {
             .toThrow('Quality can not be greater than 50.');
         }
     );
+
+    it(
+        'can not amend quality of "Sulfuras" shopping article with a value different from its standard quality value.',
+        () => {
+            const sellIn = 1;
+            const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
+            const name = ItemName.sulfurasHandOfRagnaros;
+
+            expect(() => ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendQuality(30))
+            .toThrow('Quality of "Sulfuras, Hand of Ragnaros" items has to be compliant with a standard of 80.');
+        }
+    );
 });

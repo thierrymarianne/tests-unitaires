@@ -23,6 +23,18 @@ class QualityAssurance {
         return QualityAssurance.STANDARD_QUALITY[shoppingArticle.name()];
     }
 
+    static guardAgainstArticleHavingNonCompliantQuality(
+        shoppingArticle,
+        assessedQuality
+    ) {
+        if (
+            shoppingArticle.isSulfurasItem() &&
+            QualityAssurance.getStandardQuality(shoppingArticle) !== assessedQuality
+        ) {
+            QualityAssurance.throwNonCompliantQualityError(shoppingArticle);
+        }
+    }
+
     static throwNonCompliantQualityError(shoppingArticle) {
         throw [
             `Quality of "${shoppingArticle.name()}" items `,

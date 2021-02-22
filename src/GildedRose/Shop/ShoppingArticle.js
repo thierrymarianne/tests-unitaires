@@ -40,6 +40,11 @@ class ShoppingArticle {
             throw `Quality can not be greater than ${QualityAssurance.MAX_QUALITY}.`
         }
 
+        QualityAssurance.guardAgainstArticleHavingNonCompliantQuality(
+            this,
+            quality
+        );
+
         return new ShoppingArticle(
             new Item(
                 this.name(),
@@ -78,12 +83,10 @@ class ShoppingArticle {
             return shoppingArticle;
         }
 
-        if (
-            shoppingArticle.name() === ItemName.sulfurasHandOfRagnaros &&
-            QualityAssurance.getStableQuality(shoppingArticle) !== shoppingArticle.quality()
-        ) {
-            QualityAssurance.throwNonCompliantQualityError(shoppingArticle);
-        }
+        QualityAssurance.guardAgainstArticleHavingNonCompliantQuality(
+            shoppingArticle,
+            shoppingArticle.quality()
+        );
 
         return shoppingArticle;
     }
