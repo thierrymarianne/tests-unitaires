@@ -56,10 +56,6 @@ class Shop {
                     }
                 }
 
-                if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                    shoppingArticle = shoppingArticle.amendSellIn(shoppingArticle.sellIn() - 1);
-                }
-
                 return shoppingArticle.deriveQualityFromSellIn();
             })(i);
 

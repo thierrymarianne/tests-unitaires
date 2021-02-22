@@ -58,6 +58,10 @@ class ShoppingArticle {
     deriveQualityFromSellIn() {
         let shoppingArticle = this;
 
+        if (this.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
+            shoppingArticle = this.amendSellIn(this.sellIn() - 1);
+        }
+
         if (!this.hasExpirationDatePassed()) {
             return shoppingArticle;
         }
