@@ -51,6 +51,14 @@ class ShoppingArticle {
         return this.item;
     }
 
+    chainQualityAmendments(...qualityAmendmentFns) {
+        return qualityAmendmentFns.reduce((shoppingArticle, amendQuality) => {
+            const quality = amendQuality(shoppingArticle.quality());
+
+            return shoppingArticle.amendQuality(quality);
+        }, this);
+    }
+
     amendQuality(quality) {
         if (quality < 0) {
             throw 'Quality can not be negative.'

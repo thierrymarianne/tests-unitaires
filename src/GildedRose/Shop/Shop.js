@@ -23,24 +23,33 @@ class Shop {
                 ) {
                     if (shoppingArticle.hasSomeQualityLeft()) {
                         if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                            shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
+                            shoppingArticle = shoppingArticle.chainQualityAmendments(
+                                q => q - 1
+                            );
                         }
                     }
                 } else {
                     if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                        shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                        shoppingArticle = shoppingArticle.chainQualityAmendments(
+                            q => q + 1
+                        );
 
                         if (
                             shoppingArticle.isReferencedUnderTheName(ItemName.backstagePasses)
                         ) {
                             if (shoppingArticle.sellIn() < 11) {
                                 if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                                    shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                                    shoppingArticle = shoppingArticle.chainQualityAmendments(
+                                        q => q + 1
+                                    );
                                 }
                             }
+
                             if (shoppingArticle.sellIn() < 6) {
                                 if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                                    shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                                    shoppingArticle = shoppingArticle.chainQualityAmendments(
+                                        q => q + 1
+                                    );
                                 }
                             }
                         }
@@ -58,15 +67,15 @@ class Shop {
                         ) {
                             if (shoppingArticle.hasSomeQualityLeft()) {
                                 if (shoppingArticle.isNotReferencedUnderTheName(ItemName.sulfurasHandOfRagnaros)) {
-                                    shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
+                                    shoppingArticle = shoppingArticle.chainQualityAmendments(q => q - 1);
                                 }
                             }
                         } else {
-                            shoppingArticle = shoppingArticle.amendQuality(0);
+                            shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
                         }
                     } else {
                         if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                            shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                            shoppingArticle = shoppingArticle.chainQualityAmendments(q => q + 1);
                         }
                     }
                 }

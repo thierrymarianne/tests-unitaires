@@ -134,6 +134,28 @@ describe('Shopping article', () => {
     );
 
     it(
+        'amends quality.',
+        () => {
+            const sellIn = 1;
+            const quality = 10;
+            const name = ItemName.dexterityVest;
+
+            const article = ShoppingArticle.from(
+                new Item(name, sellIn, quality)
+            ).amendQuality(11);
+
+            expect(article.quality()).toBe(11);
+            expect(
+                article.chainQualityAmendments(
+                    q => q + 1,
+                    q => q + 5,
+                    q => q - 2,
+                ).quality()
+            ).toBe(15);
+        }
+    );
+
+    it(
         'can not amend sellIn consistently with time.',
         () => {
             const sellIn = 1;
