@@ -27,6 +27,10 @@ class ShoppingArticle {
         return this.item.quality;
     }
 
+    isSulfurasItem() {
+        return this.name() === ItemName.sulfurasHandOfRagnaros;
+    }
+
     amendQuality(quality) {
         if (quality < 0) {
             throw 'Quality can not be negative.'
