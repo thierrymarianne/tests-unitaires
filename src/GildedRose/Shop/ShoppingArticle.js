@@ -42,7 +42,11 @@ class ShoppingArticle {
 
         let shoppingArticle = this;
 
-        if (this.isNotReferencedUnderTheName(ItemName.agedBrie)) {
+        if (this.isReferencedUnderTheName(ItemName.agedBrie)) {
+            if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
+                shoppingArticle = shoppingArticle.chainQualityAmendments(q => q + 1);
+            }
+        } else {
             if (
                 this.isNotReferencedUnderTheName(ItemName.backstagePasses)
             ) {
@@ -53,10 +57,6 @@ class ShoppingArticle {
                 }
             } else {
                 shoppingArticle = shoppingArticle.chainQualityAmendments(_ => 0);
-            }
-        } else {
-            if (QualityAssurance.isShoppingArticleBelowTheQualityStandard(shoppingArticle)) {
-                shoppingArticle = shoppingArticle.chainQualityAmendments(q => q + 1);
             }
         }
 
