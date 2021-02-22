@@ -12,6 +12,73 @@ class Shop {
     }
 
     assessQualityOfShoppingArticlesInCart() {
+        const items = [];
+
+        for (let i = 0; i < this.cart.articles().length; i++) {
+            const article = ((i) => {
+                let shoppingArticle = this.cart.nthShoppingArticle(i);
+
+                if (
+                    shoppingArticle.name() !== ItemName.agedBrie &&
+                    shoppingArticle.name() !== ItemName.backstagePasses
+                ) {
+                    if (shoppingArticle.quality() > 0) {
+                        if (shoppingArticle.name() !== ItemName.sulfurasHandOfRagnaros) {
+                            shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
+                        }
+                    }
+                } else {
+                    if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                        shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+
+                        if (
+                            shoppingArticle.name() === ItemName.backstagePasses
+                        ) {
+                            if (shoppingArticle.sellIn < 11) {
+                                if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                                    shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                                }
+                            }
+                            if (shoppingArticle.sellIn < 6) {
+                                if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                                    shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (shoppingArticle.name() !== ItemName.sulfurasHandOfRagnaros) {
+                    shoppingArticle = shoppingArticle.amendSellIn(shoppingArticle.sellIn() - 1);
+                }
+
+                if (shoppingArticle.sellIn < 0) {
+                    if (shoppingArticle.name() !== ItemName.agedBrie) {
+                        if (
+                            shoppingArticle.name() !== ItemName.backstagePasses
+                        ) {
+                            if (shoppingArticle.quality() > 0) {
+                                if (shoppingArticle.name() !== ItemName.sulfurasHandOfRagnaros) {
+                                    shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() - 1);
+                                }
+                            }
+                        } else {
+                            shoppingArticle = shoppingArticle.amendQuality(0);
+                        }
+                    } else {
+                        if (shoppingArticle.quality() < QualityAssurance.MAX_QUALITY) {
+                            shoppingArticle = shoppingArticle.amendQuality(shoppingArticle.quality() + 1);
+                        }
+                    }
+                }
+
+                return shoppingArticle
+            })(i);
+
+            items.push(article.unwrapItem());
+        }
+
+        return items;
     }
 
     assessQualityOfItems() {
@@ -74,8 +141,6 @@ class Shop {
     }
 
     updateQuality() {
-        this.assessQualityOfShoppingArticlesInCart();
-
         return this.assessQualityOfItems()
     }
 }

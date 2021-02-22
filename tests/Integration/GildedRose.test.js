@@ -273,6 +273,30 @@ describe(
                 expect(updatedItems[1].quality).toBe(quality[1] + 3);
             }
         );
+
+        it(
+            'assesses the quality of shopping articles in cart.',
+            () => {
+                const items = [
+                    new Item(ItemName.dexterityVest, 10, 20),
+                    new Item(ItemName.agedBrie, 2, 0),
+                    new Item(ItemName.elixirOfTheMongose, 5, 7),
+                    new Item(ItemName.sulfurasHandOfRagnaros, 0, 80),
+                    new Item(ItemName.sulfurasHandOfRagnaros, -1, 80),
+                    new Item(ItemName.backstagePasses, 15, 20),
+                    new Item(ItemName.backstagePasses, 10, 49),
+                    new Item(ItemName.backstagePasses, 5, 49),
+                    new Item(ItemName.conjuredManaCake, 3, 6)
+                ];
+
+                const gildedRose = new Shop(items);
+
+                const assessedItems = gildedRose.assessQualityOfItems();
+                const assessedCartItems = gildedRose.assessQualityOfShoppingArticlesInCart();
+
+                expect(assessedItems).toEqual(assessedCartItems);
+            }
+        );
     }
 );
 
