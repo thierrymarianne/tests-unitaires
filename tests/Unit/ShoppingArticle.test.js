@@ -76,8 +76,7 @@ describe('Shopping article', () => {
         'amends sellIn.',
         () => {
                 const sellIn = 1;
-                const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
-                const name = ItemName.sulfurasHandOfRagnaros;
+                const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
 
                 const article = ShoppingArticle.from(
                     new Item(name, sellIn, quality)
@@ -91,8 +90,8 @@ describe('Shopping article', () => {
         'can not amend sellIn consistently with time.',
         () => {
                 const sellIn = 1;
-                const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
                 const name = ItemName.sulfurasHandOfRagnaros;
+                const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
 
                 expect(() => ShoppingArticle.from(
                     new Item(name, sellIn, quality)
@@ -105,7 +104,7 @@ describe('Shopping article', () => {
         'can not amend quality with negative value.',
         () => {
             const sellIn = 1;
-            const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
+            const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
             const name = ItemName.agedBrie;
 
             expect(() => ShoppingArticle.from(
@@ -119,7 +118,7 @@ describe('Shopping article', () => {
         'can not amend quality with a value above the quality threshold.',
         () => {
             const sellIn = 1;
-            const quality = QualityAssurance.STABLE_QUALITY_OVER_TIME[ItemName.sulfurasHandOfRagnaros];
+            const quality = QualityAssurance.STANDARD_QUALITY[ItemName.sulfurasHandOfRagnaros];
             const name = ItemName.agedBrie;
 
             expect(() => ShoppingArticle.from(
