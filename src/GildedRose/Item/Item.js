@@ -4,10 +4,6 @@ class Item {
         this.sellIn = sellIn;
         this.quality = quality;
     }
-
-    updateQuality() {
-        // TODO
-    }
 }
 
 Item.SULFURA_QUALITY = 80;
