@@ -8,4 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
 {
+    public function test_quelquechose(): void
+    {
+    }
 }
